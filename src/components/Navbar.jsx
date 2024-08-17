@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <div>
-      <div className="flex justify-between bg-indigo-600 p-2 pl-4 rounded-xl">
+      <div className="flex justify-between bg-indigo-600 p-3 pl-4 rounded-xl">
         <div className="text-3xl font-extrabold text-white ">
           PasswordGenerator🔐
         </div>
