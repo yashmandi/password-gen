@@ -12,7 +12,7 @@ const Navbar = () => {
             About
           </div>
           <div className="hover:text-white text-gray-300 cursor-pointer transition">
-            GitHub
+            GitHub 
           </div>
         </div>
       </div>
