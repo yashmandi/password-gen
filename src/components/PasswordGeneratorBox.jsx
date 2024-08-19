@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
 const PasswordGeneratorBox = () => {
-  const [password, setPassword] = useState(""); // State to store the generated password
-  const [copied, setCopied] = useState(false); // State to track copy action
+  const [password, setPassword] = useState("");
+  const [copied, setCopied] = useState(false); 
 
-  // Function to generate a random 12-character password
   const generatePassword = () => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
