@@ -28,8 +28,8 @@ const PasswordGeneratorBox = () => {
         <button
           className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 py- px- rounded-lg text-white text-lg font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
           onClick={generatePassword}
-        >
-          Generate a Strong Password
+        > 
+          Generate a Strong Password 🦾
         </button>
         {password && (
           <div className="flex items-center mt-8 w-full">
@@ -41,7 +41,7 @@ const PasswordGeneratorBox = () => {
             />
             <button
               className={`btn py-3 px-4 rounded-lg font-semibold shadow-md transform transition-all duration-300 ${copied
-                ? "bg-gradient-to-r from-green-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white scale-100 hover:scale-[1.02]"
+                ? "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
                 : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
                 }`}
               onClick={copyToClipboard}
