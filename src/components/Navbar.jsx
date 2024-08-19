@@ -13,7 +13,7 @@ const Navbar = () => {
             href="https://github.com/yashmandi/password-gen"
             className="text-sm sm:text-base"
           >
-            <div className="hover:text-white  text-gray-300 cursor-pointer transition">
+            <div className="hidden md:block hover:text-white text-gray-300 cursor-pointer transition">
               GitHub
             </div>
           </a>
