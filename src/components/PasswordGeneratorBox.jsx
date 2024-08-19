@@ -18,7 +18,7 @@ const PasswordGeneratorBox = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password);
-    setCopied(true); // Set copied state to true after copying
+    setCopied(true); 
   };
 
   return (
