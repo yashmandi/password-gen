@@ -14,10 +14,9 @@ const PasswordGeneratorBox = () => {
       newPassword += characters[randomIndex];
     }
     setPassword(newPassword);
-    setCopied(false); // Reset the copied state
+    setCopied(false); 
   };
 
-  // Function to copy the password to clipboard
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password);
     setCopied(true); // Set copied state to true after copying
@@ -25,23 +24,23 @@ const PasswordGeneratorBox = () => {
 
   return (
     <div className="flex items-center justify-center mt-24">
-      <div className="border w-96 p-10 mt-24 flex flex-col items-center rounded-lg bg-[#1c2129]">
+      <div className=" w-96 p-10 border-2 border-gray-400  flex flex-col items-center rounded-lg bg-[#1c2129]">
         <button
-          className="btn btn-primary p-2 rounded-lg text-white mb-4"
+          className="btn btn-primary rounded-lg text-white text-lg"
           onClick={generatePassword}
         >
           Generate Password
         </button>
         {password && (
-          <div className="flex items-center">
+          <div className="flex items-center mt-6">
             <input
               type="text"
               value={password}
               readOnly
-              className="p-2 rounded-lg bg-gray-700 text-white w-full mr-2"
+              className="p-2 rounded-lg bg-gray-800 text-white w-full mr-2"
             />
             <button
-              className="btn btn-secondary p-2 rounded-lg text-white"
+              className="btn bg-indigo-600 py-2 px-2 rounded-lg text-white"
               onClick={copyToClipboard}
             >
               {copied ? "Copied!" : "Copy"}
