@@ -23,7 +23,7 @@ const PasswordGeneratorBox = () => {
 
   return (
     <div className="flex items-center justify-center mt-24 px-4">
-      <div className="w-full max-w-md p-8  border-gray-800 shadow-lg flex flex-col items-center rounded-lg bg-gradient-to-b from-[#202d3a] to-[#1c2129]">
+      <div className="w-full max-w-md p-8  border-gray-800 shadow-lg flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#1c2129]">
         <button
           className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 py- px- rounded-lg text-white text-lg w-full font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
           onClick={generatePassword}
