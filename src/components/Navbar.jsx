@@ -5,7 +5,7 @@ const Navbar = () => {
     <div>
       <div className="flex justify-between bg-indigo-600 p-3 pl-4 rounded-xl">
         <div className="text-2xl sm:text-3xl font-extrabold text-white mx-auto sm:mx-0">
-          PasswordGenerator🔐
+          PassGen🔐
         </div>
         <div className="flex gap-4 sm:gap-6 pr-2 mt-1">
           <a
