@@ -28,7 +28,7 @@ const PasswordGeneratorBox = () => {
           className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-4 rounded-lg text-white text-base sm:text-lg w-full font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
           onClick={generatePassword}
         >
-          Generate a Strong Password 🦾
+          Generate a Strong Password!
         </button>
 
         {password && (
