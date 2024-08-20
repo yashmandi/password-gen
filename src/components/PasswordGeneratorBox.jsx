@@ -37,7 +37,7 @@ const PasswordGeneratorBox = () => {
               type="text"
               value={password}
               readOnly
-              className="p-2 rounded-lg bg-gray-800 text-white w-full sm:w-72 mb-4 sm:mb-0 sm:mr-2 text-center font-mono text-lg tracking-wider shadow-inner"
+              className="p-2 rounded-lg bg-gray-700 text-white w-full sm:w-72 mb-4 sm:mb-0 sm:mr-2 text-center font-mono text-lg tracking-wider shadow-inner"
             />
             <button
               className={`btn py-3 px-4 rounded-lg font-semibold shadow-md transform transition-all duration-300 ${
