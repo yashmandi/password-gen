@@ -54,6 +54,7 @@ const About = () => {
           </p>
         </section>
       </div>
+      <hr className="border-[#29283c] mt-20" />
       <Footer />
     </div>
   );
