@@ -32,7 +32,7 @@ const PasswordGeneratorBox = () => {
           type="range"
           min="8"
           max="40"
-          step="4"
+          step="2"
           value={passwordLength}
           onChange={(e) => setPasswordLength(parseInt(e.target.value))}
           className="w-full mb-4"
