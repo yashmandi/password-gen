@@ -31,7 +31,7 @@ const PasswordGeneratorBox = () => {
         <input
           type="range"
           min="8"
-          max="64"
+          max="40"
           step="4"
           value={passwordLength}
           onChange={(e) => setPasswordLength(parseInt(e.target.value))}
