@@ -14,7 +14,7 @@ const Home = () => {
           password with <span className="text-[#4F46E5] hover:text-indigo-400 font-extrabold  transition cursor-default">PassGen</span>🔐
         </p>
         <p className="text-md text-center mt-4 text-gray-400">
-          Designed to keep your accounts <span className="text-gray-300 font-semibold">safe</span> and <span className="text-gray-300 font-semibold">secure</span>.
+          Designed to keep your accounts <span className="text-gray-300 font-semibold">safe</span> and <span className="text-gray-300 font-semibold">secure</span>
         </p>
       </div>
       <main className="flex-grow">
