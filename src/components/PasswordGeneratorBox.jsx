@@ -3,12 +3,13 @@ import React, { useState } from "react";
 const PasswordGeneratorBox = () => {
   const [password, setPassword] = useState("");
   const [copied, setCopied] = useState(false);
+  const [passwordLength, setPasswordLength] = useState(12); // Default password length
 
   const generatePassword = () => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
     let newPassword = "";
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       newPassword += characters[randomIndex];
     }
@@ -24,6 +25,19 @@ const PasswordGeneratorBox = () => {
   return (
     <div className="flex items-center justify-center mt-24 px-4">
       <div className="w-full max-w-md p-8 border-gray-800 shadow-lg flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#1c2129]">
+        <label className="text-white mb-4 text-lg font-semibold">
+          Password Length: {passwordLength}
+        </label>
+        <input
+          type="range"
+          min="8"
+          max="64"
+          step="4"
+          value={passwordLength}
+          onChange={(e) => setPasswordLength(parseInt(e.target.value))}
+          className="w-full mb-4"
+        />
+
         <button
           className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-4 rounded-lg text-white text-base sm:text-lg w-full font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
           onClick={generatePassword}
