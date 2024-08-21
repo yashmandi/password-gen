@@ -29,8 +29,7 @@ const Section = () => {
 
             <div className="grid  gap-4 sm:grid-cols-3">
               <a
-                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-600 to-purple-700 h-52  p-3 pt-8 transition-all"
-                href="#"
+                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-600 to-purple-700 h-52  p-3 pt-8 transition-all cursor-default"
               >
                 <h2 className="mt-2 text-xl text-white font-bold">
                   Customizable
@@ -43,8 +42,7 @@ const Section = () => {
               </a>
 
               <a
-                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all"
-                href="#"
+                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all cursor-default"
               >
                 <h2 className="mt-2 text-xl text-white font-bold">Instant</h2>
 
@@ -54,16 +52,12 @@ const Section = () => {
               </a>
 
               <a
-                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all"
-                href="#"
+                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all cursor-default"
               >
-                <h2 className="mt-2 text-xl text-white font-bold">
-                  Customizable
-                </h2>
+                <h2 className="mt-2 text-xl text-white font-bold">Secure</h2>
 
                 <p className="hidden text-start sm:mt-4 pl-2 sm:block sm:text-sm sm:text-white">
-                  Adjust the length of your passwords to meet specific security
-                  needs.
+                  Ensure your passwords are strong and random to protect.
                 </p>
               </a>
             </div>
