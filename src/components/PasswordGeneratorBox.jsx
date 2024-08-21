@@ -24,7 +24,7 @@ const PasswordGeneratorBox = () => {
 
   return (
     <div className="flex items-center justify-center pt-20 px-4">
-      <div className="w-3/5 p-8 border-gray-800 shadow-lg flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#1c2129]">
+    <div className="w-3/5 p-8 border-gray-800 shadow-xl flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#171b23]">
         <label className="text-gray-200 mb-4 text-xl font-semibold">
           Password Length: <span className="text-white font-bold">{passwordLength}</span>
         </label>
