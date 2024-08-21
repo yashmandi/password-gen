@@ -15,8 +15,8 @@ const Section = () => {
                 PassGen is a simple and efficient tool for generating strong,
                 random passwords to enhance your online security. With
                 customizable length options, it ensures you create passwords
-                that are secure, protecting your accounts
-                from potential threats.
+                that are secure, protecting your accounts from potential
+                threats.
               </p>
 
               <a
@@ -27,97 +27,45 @@ const Section = () => {
               </a>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <div className="grid  gap-4 sm:grid-cols-3">
               <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-600 to-purple-700 h-52  p-3 pt-8 transition-all"
                 href="#"
               >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="size-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
+                <h2 className="mt-2 text-xl text-white font-bold">
+                  Customizable
+                </h2>
 
-                <h2 className="mt-2 font-bold">Accountant</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-white">
-                  Lorem ipsum dolor sit amet consectetur.
+                <p className="hidden text-start sm:mt-4 pl-2 sm:block sm:text-sm sm:text-white">
+                  Adjust the length of your passwords to meet specific security
+                  needs.
                 </p>
               </a>
 
               <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all"
                 href="#"
               >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="size-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
+                <h2 className="mt-2 text-xl text-white font-bold">Instant</h2>
 
-                <h2 className="mt-2 font-bold">Accountant</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-white">
-                  Lorem ipsum dolor sit amet consectetur.
+                <p className="hidden text-start sm:mt-4 pl-2 sm:block sm:text-sm sm:text-white">
+                  Generate strong, random passwords instantly with ease.
                 </p>
               </a>
 
               <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all"
                 href="#"
               >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="size-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
+                <h2 className="mt-2 text-xl text-white font-bold">
+                  Customizable
+                </h2>
 
-                <h2 className="mt-2 font-bold">Accountant</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-white">
-                  Lorem ipsum dolor sit amet consectetur.
+                <p className="hidden text-start sm:mt-4 pl-2 sm:block sm:text-sm sm:text-white">
+                  Adjust the length of your passwords to meet specific security
+                  needs.
                 </p>
               </a>
-
             </div>
           </div>
         </div>
