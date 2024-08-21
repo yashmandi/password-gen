@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import PasswordGeneratorBox from "../components/PasswordGeneratorBox";
 import Footer from "../components/Footer";
+import Section from "../components/Section";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <main className="flex-grow">
         <PasswordGeneratorBox />
       </main>
+      <Section />
       <Footer />
     </div>
   );
