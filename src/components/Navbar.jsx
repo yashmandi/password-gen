@@ -4,9 +4,11 @@ const Navbar = () => {
   return (
     <div>
       <div className="flex justify-between bg-indigo-600 p-3 pl-4 rounded-xl shadow-xl">
-        <div className="text-2xl sm:text-3xl font-extrabold text-white mx-auto sm:mx-0">
-          PassGen🔐
-        </div>
+        <Link to="/">
+          <div className="text-2xl sm:text-3xl font-extrabold text-white mx-auto sm:mx-0">
+            PassGen🔐
+          </div>
+        </Link>
         <div className="flex gap-4 sm:gap-6 mt-1">
           <a
             target="_blank"
