@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
@@ -17,7 +17,11 @@ const Navbar = () => {
               GitHub
             </div>
           </a>
-          <div className="md:block hover:text-white text-gray-300 cursor-pointer transition mr-2">About</div>
+          <Link to="/about">
+            <div className="md:block hover:text-white text-gray-300 cursor-pointer transition mr-2">
+              About
+            </div>
+          </Link>
         </div>
       </div>
     </div>
