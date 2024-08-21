@@ -47,7 +47,6 @@ const PasswordGeneratorBox = () => {
 
         {password && (
           <div className="flex flex-col sm:flex-row justify-between items-center mt-8 w-full">
-            {/* <div> </div> */}
             <input
               type="text"
               value={password}

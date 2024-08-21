@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="text-2xl sm:text-3xl font-extrabold text-white mx-auto sm:mx-0">
           PassGen🔐
         </div>
-        <div className="flex gap-4 sm:gap-6 pr-2 mt-1">
+        <div className="flex gap-4 sm:gap-6 mt-1">
           <a
             target="_blank"
             href="https://github.com/yashmandi/password-gen"
@@ -17,6 +17,7 @@ const Navbar = () => {
               GitHub
             </div>
           </a>
+          <div className="md:block hover:text-white text-gray-300 cursor-pointer transition mr-2">About</div>
         </div>
       </div>
     </div>
