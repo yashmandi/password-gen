@@ -20,6 +20,7 @@ const Home = () => {
       </div>
       <main className="flex-grow">
         <PasswordGeneratorBox />
+      <hr className="border-gray-700 mt-24"/>
       </main>
       <Section />
       <Footer />
