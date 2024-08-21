@@ -25,8 +25,8 @@ const PasswordGeneratorBox = () => {
   return (
     <div className="flex items-center justify-center mt-24 px-4">
       <div className="w-3/5 p-8 border-gray-800 shadow-lg flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#1c2129]">
-        <label className="text-white mb-4 text-lg font-semibold">
-          Password Length: {passwordLength}
+        <label className="text-gray-200 mb-4 text-xl font-semibold">
+          Password Length: <span className="text-white font-bold">{passwordLength}</span>
         </label>
         <input
           type="range"
@@ -58,8 +58,8 @@ const PasswordGeneratorBox = () => {
             <button
               className={`btn py-3 px-4 rounded-lg font-semibold shadow-md transform transition-all duration-300 ${
                 copied
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
-                  : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
+                  ? "bg-gradient-to-r w-24 from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
+                  : "bg-gradient-to-r w-24 from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
               }`}
               onClick={copyToClipboard}
             >
