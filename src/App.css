@@ -1,11 +1,10 @@
-/* Ensure that the html and body elements take up the full height of the viewport */
 html, body {
   height: 100%;
   margin: 0;
   /* overflow: hidden;  */
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
 }
 
-/* Ensure that the root element takes up the full height and uses flexbox */
 #root {
   display: flex;
   flex-direction: column;
@@ -14,11 +13,13 @@ html, body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
 }
 
 /* Add padding to avoid content hiding behind the footer */
 .pb-16 {
   padding-bottom: 4rem; /* Adjust this value to match the footer's height */
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
 }
 
 /* Add any additional styles for the logo */
@@ -27,6 +28,7 @@ html, body {
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
 }
 
 .logo:hover {
@@ -56,9 +58,11 @@ html, body {
 /* Styles for cards */
 .card {
   padding: 2em;
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
 }
 
 /* Styles for read-the-docs */
 .read-the-docs {
   color: #888;
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
 }

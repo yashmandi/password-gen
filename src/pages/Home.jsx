@@ -10,9 +10,10 @@ const Home = () => {
       <Navbar />
       <div>
         <p className="text-3xl pt-24 font-bold text-center mt-10 text-white">
-          Effortlessly create a strong, random password <br />with our online
-          generator tool.
+          Effortlessly create a strong, random password <br />
+          with our online generator tool.
         </p>
+        <p className="text-lg text-center mt-2 text-gray-300">designed to keep your accounts safe and secure.</p>
       </div>
       <main className="flex-grow">
         <PasswordGeneratorBox />
