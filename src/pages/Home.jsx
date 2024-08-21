@@ -1,16 +1,23 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-import PasswordGeneratorBox from '../components/PasswordGeneratorBox';
-import Footer from '../components/Footer';
+import React from "react";
+import Navbar from "../components/Navbar";
+import PasswordGeneratorBox from "../components/PasswordGeneratorBox";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <div className="flex flex-col min-h-screen"> {/* Adjust padding-bottom to avoid overlap with the footer */}
+    <div className="flex flex-col min-h-screen">
+      {" "}
       <Navbar />
+      <div>
+        <p className="text-3xl pt-24 font-bold text-center mt-10 text-white">
+          Effortlessly create a strong, random password <br />with our online
+          generator tool.
+        </p>
+      </div>
       <main className="flex-grow">
         <PasswordGeneratorBox />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
