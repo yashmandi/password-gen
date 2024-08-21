@@ -10,7 +10,7 @@ const Home = () => {
       {" "}
       <Navbar />
       <div>
-        <p className="text-3xl pt-16 font-bold text-center mt-10 text-white">
+        <p className="text-4xl pt-16 font-bold text-center mt-10 text-white">
           Instantly generate a strong, random
           <br />
           password with{" "}
