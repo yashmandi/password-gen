@@ -41,10 +41,11 @@ const Faq = () => {
                 {faqItems.map((item, index) => (
                     <div key={index} className="mb-4">
                         <button
-                            className="w-3/5 text-center font-semibold py-2 px-4 bg-[#222931] text-white rounded-lg focus:outline-none transition-all duration-300 hover:bg-[#161b20]"
+                            className="w-full md:w-3/5 text-center font-semibold py-2 px-4 bg-[#222931] text-white rounded-lg focus:outline-none transition-all duration-300 hover:bg-[#161b20]"
                             onClick={() => toggleAccordion(index)}
                         >
                             {item.question}
+                        </button>
                         <div
                             className={`transition-max-height duration-500 ease-in-out overflow-hidden ${activeIndex === index ? 'max-h-screen' : 'max-h-0'
                                 }`}
@@ -54,12 +55,10 @@ const Faq = () => {
                                 {item.answer}
                             </div>
                         </div>
-                        </button>
                     </div>
                 ))}
             </section>
         </div>
-
     );
 }
 
