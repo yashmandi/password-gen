@@ -3,63 +3,24 @@ import React from "react";
 const Section = () => {
   return (
     <div>
-      <section className="pt-20">
-        <div className="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-          <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
-            <div className="mx-auto max-w-lg text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
-              <h2 className="text-3xl font-bold sm:text-4xl text-white">
-                Secure, private, and compliant by design!
-              </h2>
-
-              <p className="mt-4 text-white">
-                PassGen is a simple and efficient tool for generating strong,
-                random passwords to enhance your online security. With
-                customizable length options, it ensures you create passwords
-                that are secure, protecting your accounts from potential
-                threats.
-              </p>
-
-              <a
-                href="#"
-                className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-3 rounded-lg text-white text-base sm:text-md w-52 font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl mt-6"
-              >
-                Get Started Today
-              </a>
+      <section className="">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+          <div className="max-w-screen-md mb-8 lg:mb-16">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-white">Designed for business teams like yours</h2>
+            <p className="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+          </div>
+          <div className="space-y-8  md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+            <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-10 rounded-xl shadow-gray-900 hover:bg-gradient-to-b from-purple-600 to-indigo-600 shadow-xl ">
+              <h3 className="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
+              <p className="text-white">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
             </div>
-
-            <div className="grid  gap-4 sm:grid-cols-3">
-              <a
-                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-600 to-purple-700 h-52  p-3 pt-8 transition-all cursor-default"
-              >
-                <h2 className="mt-2 text-xl text-white font-bold">
-                  Customizable
-                </h2>
-
-                <p className="hidden text-start sm:mt-4 pl-2 sm:block sm:text-sm sm:text-white">
-                  Adjust the length of your passwords to meet specific security
-                  needs.
-                </p>
-              </a>
-
-              <a
-                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all cursor-default"
-              >
-                <h2 className="mt-2 text-xl text-white font-bold">Instant</h2>
-
-                <p className="hidden text-start sm:mt-4 pl-2 sm:block sm:text-sm sm:text-white">
-                  Generate strong, random passwords instantly with ease.
-                </p>
-              </a>
-
-              <a
-                className="block shadow-2xl hover:shadow-gray-700  shadow-gray-800 transition-all rounded-xl bg-gradient-to-r from-indigo-800 to-purple-500 h-52  p-3 pt-8 transition-all cursor-default"
-              >
-                <h2 className="mt-2 text-xl text-white font-bold">Secure</h2>
-
-                <p className="hidden text-start sm:mt-4 pl-2 sm:block sm:text-sm sm:text-white">
-                  Ensure your passwords are strong and random to protect.
-                </p>
-              </a>
+            <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-10 rounded-xl shadow-gray-900 hover:bg-gradient-to-b from-purple-600 to-indigo-600 shadow-xl ">
+              <h3 className="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
+              <p className="text-white">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
+            </div>
+            <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-10 rounded-xl shadow-gray-900 hover:bg-gradient-to-b from-purple-600 to-indigo-600 shadow-xl ">
+              <h3 className="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
+              <p className="text-white">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
             </div>
           </div>
         </div>
