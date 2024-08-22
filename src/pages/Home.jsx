@@ -34,9 +34,12 @@ const Home = () => {
       <Section />
       <hr className="border-[#29283c] mt-20" />
       <BlogSection />
+      <hr className="border-[#29283c] mt-8" />
+
       <Faq />
-      <hr className="border-[#29283c] mt-20" />
-      <Footer />
+      <div className="mt-40 border-t border-gray-700">
+        <Footer />
+      </div>
     </div>
   );
 };

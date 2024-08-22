@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 const About = () => {
   return (
     <div>
-        <Navbar />
+      <Navbar />
       <div className="container mx-auto p-12 mt-6 text-left text-white pl-2 pr-44">
         {/* About Section */}
         <section id="about" className="mb-8">
@@ -56,8 +56,9 @@ const About = () => {
           </p>
         </section>
       </div>
-      <hr className="border-[#29283c] mt-20" />
-      <Footer />
+      <div className="mt-40 border-t border-gray-700">
+        <Footer />
+      </div>
     </div>
   );
 };

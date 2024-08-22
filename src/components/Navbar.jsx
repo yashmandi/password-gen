@@ -10,25 +10,25 @@ const Navbar = () => {
           </div>
         </Link>
         <div className="flex gap-4 sm:gap-6 mt-1.5">
-          <a
-            target="_blank"
-            href="https://github.com/yashmandi/password-gen"
-            className="text-sm sm:text-base"
-          >
-            <div className="hidden md:block hover:text-white text-gray-300 cursor-pointer transition">
-              GitHub
-            </div>
-          </a>
           <Link to="/blogs">
             <div className="md:block hover:text-white text-gray-300 cursor-pointer transition">
               Blog
             </div>
           </Link>
           <Link to="/about">
-            <div className="md:block hover:text-white text-gray-300 cursor-pointer transition mr-2">
+            <div className="md:block hover:text-white text-gray-300 cursor-pointer transition">
               About
             </div>
           </Link>
+          <a
+            target="_blank"
+            href="https://github.com/yashmandi/password-gen"
+            className="text-sm sm:text-base"
+          >
+            <div className="hidden md:block hover:text-white text-gray-300 cursor-pointer transition  mr-2">
+              GitHub
+            </div>
+          </a>
         </div>
       </div>
     </div>

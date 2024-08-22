@@ -16,7 +16,8 @@ const BlogsList = () => {
             these simple tips.
           </p>
           <a
-            href="#"
+            href="https://blog.netwrix.com/2023/11/15/password-best-practices/"
+            target="_blank"
             className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg text-white text-base sm:text-sm w-32 font-semibold hover:shadow-xl transition-all tracking-wide shadow-lg transform transition-transform duration-300  hover:shadow-2xl mt-6"
           >
             Learn More
@@ -32,7 +33,8 @@ const BlogsList = () => {
             digital life.
           </p>
           <a
-            href="#"
+            href="https://www.mcafee.com/blogs/privacy-identity-protection/why-do-i-need-a-password-manager/#:~:text=This%20eliminates%20the%20risk%20of,that%20best%20fits%20your%20needs."
+            target="_blank"
             className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg text-white text-base sm:text-sm w-32 font-semibold hover:shadow-xl transition-all tracking-wide shadow-lg transform transition-transform duration-300  hover:shadow-2xl mt-6"
           >
             Learn More
@@ -48,7 +50,8 @@ const BlogsList = () => {
             strength.
           </p>
           <a
-            href="#"
+            href="https://www.ramsac.com/it-resources/cybersecurity/password-complexity/#:~:text=The%20greater%20the%20requirements%2C%20the,longer%20to%20guess%20or%20breach."
+            target="_blank"
             className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg text-white text-base sm:text-sm w-32 font-semibold hover:shadow-xl transition-all tracking-wide shadow-lg transform transition-transform duration-300  hover:shadow-2xl mt-6"
           >
             Learn More
@@ -63,7 +66,8 @@ const BlogsList = () => {
             avoid them. Improve your security by avoiding these common pitfalls.
           </p>
           <a
-            href="#"
+            href="https://www.tpx.com/blog/common-password-mistakes-to-avoid/"
+            target="_blank"
             className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg text-white text-base sm:text-sm w-32 font-semibold hover:shadow-xl transition-all tracking-wide shadow-lg transform transition-transform duration-300  hover:shadow-2xl mt-6"
           >
             Learn More
@@ -79,7 +83,8 @@ const BlogsList = () => {
             crucial for your security.
           </p>
           <a
-            href="#"
+            href="https://jetpack.com/blog/password-reuse/#:~:text=Once%20a%20single%20account's%20credentials,for%20further%20attacks%20or%20fraud."
+            target="_blank"
             className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg text-white text-base sm:text-sm w-32 font-semibold hover:shadow-xl transition-all tracking-wide shadow-lg transform transition-transform duration-300  hover:shadow-2xl mt-6"
           >
             Learn More
@@ -95,7 +100,8 @@ const BlogsList = () => {
             with these helpful tips.
           </p>
           <a
-            href="#"
+            href="https://proton.me/blog/create-remember-strong-passwords"
+            target="_blank"
             className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg text-white text-base sm:text-sm w-32 font-semibold hover:shadow-xl transition-all tracking-wide shadow-lg transform transition-transform duration-300  hover:shadow-2xl mt-6"
           >
             Learn More

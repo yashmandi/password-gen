@@ -35,7 +35,7 @@ const Faq = () => {
     ];
 
     return (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto p-6 mt-20">
             <section id="faq">
                 <h2 className="text-3xl font-bold mb-12 text-white text-center">Frequently Asked Questions</h2>
                 {faqItems.map((item, index) => (
