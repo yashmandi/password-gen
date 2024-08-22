@@ -6,10 +6,10 @@ const BlogSection = () => {
     <div>
       <section className="mt-20">
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-          <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-4xl dark:text-white">
             Read about password best practices!
           </h1>
-          <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+          <p className="mb-8 text-lg font-normal text-gray-500 lg:text-md sm:px-16 xl:px-48 dark:text-gray-400">
             Explore our comprehensive blog for expert advice on creating strong,
             secure passwords. Learn best practices, stay updated on the latest
             security trends, and ensure your online safety with our in-depth

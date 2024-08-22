@@ -33,6 +33,7 @@ const Home = () => {
       <Section />
       <hr className="border-[#29283c] mt-20" />
       <BlogSection />
+      <hr className="border-[#29283c] mt-20" />
       <Footer />
     </div>
   );
