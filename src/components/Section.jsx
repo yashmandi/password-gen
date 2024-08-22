@@ -3,11 +3,11 @@ import React from "react";
 const Section = () => {
   return (
     <div>
-      <section className="">
+      <section className="mt-16">
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="max-w-screen-md mb-8 lg:mb-16 mx-auto text-center">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-white">Designed for business teams like yours</h2>
-            <p className="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-white">Built for security-conscious individuals like you.</h2>
+            <p className="text-gray-500 sm:text-lg dark:text-gray-400">At PassGen, we prioritize robust encryption and user-friendly design to generate strong, reliable passwords that keep your accounts safe and your mind at ease.</p>
           </div>
           <div className="space-y-8  md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
             <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-10 rounded-xl shadow-gray-900 hover:bg-gradient-to-b from-purple-700 to-indigo-500 shadow-xl ">
