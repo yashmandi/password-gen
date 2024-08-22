@@ -21,10 +21,10 @@ const Home = () => {
           </span>
           🔐
         </p>
-        <p className="text-sm sm:text-md mt-4 text-gray-400">
+        <p className="text-md sm:text-md mt-4 text-gray-400">
           Designed to keep your accounts{" "}
-          <span className="text-gray-300 font-semibold">safe</span> and{" "}
-          <span className="text-gray-300 font-semibold">secure</span>
+          <span className="text-gray-300 font-semibold">Safe</span> and{" "}
+          <span className="text-gray-300 font-semibold">Secure</span>
         </p>
       </div>
       <main className="flex-grow">
