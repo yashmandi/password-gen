@@ -24,8 +24,8 @@ const PasswordGeneratorBox = () => {
 
   return (
     <div className="flex items-center justify-center pt-20 px-4">
-    <div className="w-3/5 p-8 border-gray-800 shadow-xl flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#171b23]">
-        <label className="text-gray-200 mb-4 text-xl font-semibold">
+      <div className="w-full max-w-lg p-8 border-gray-800 shadow-xl flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#171b23]">
+        <label className="text-gray-200 mb-4 text-lg sm:text-xl font-semibold">
           Password Length: <span className="text-white font-bold">{passwordLength}</span>
         </label>
         <input
@@ -39,7 +39,7 @@ const PasswordGeneratorBox = () => {
         />
 
         <button
-          className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-4 rounded-lg text-white text-base sm:text-lg w-80 font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
+          className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-4 rounded-lg text-white text-sm sm:text-lg w-full sm:w-80 font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
           onClick={generatePassword}
         >
           Generate a Strong Password!
@@ -57,8 +57,8 @@ const PasswordGeneratorBox = () => {
             <button
               className={`btn py-3 px-4 rounded-lg font-semibold shadow-md transform transition-all duration-300 ${
                 copied
-                  ? "bg-gradient-to-r w-24 from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
-                  : "bg-gradient-to-r w-24 from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
+                  ? "bg-gradient-to-r w-24 sm:w-24 from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
+                  : "bg-gradient-to-r w-24 sm:w-24 from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
               }`}
               onClick={copyToClipboard}
             >
