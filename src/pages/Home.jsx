@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import PasswordGeneratorBox from "../components/PasswordGeneratorBox";
 import Footer from "../components/Footer";
 import Section from "../components/Section";
+import BlogSection from "../components/BlogSection";
 
 const Home = () => {
   return (
@@ -31,6 +32,7 @@ const Home = () => {
       </main>
       <Section />
       <hr className="border-[#29283c] mt-20" />
+      <BlogSection />
       <Footer />
     </div>
   );
