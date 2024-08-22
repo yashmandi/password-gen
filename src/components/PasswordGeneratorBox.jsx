@@ -51,15 +51,15 @@ const PasswordGeneratorBox = () => {
               type="text"
               value={password}
               readOnly
-              className="p-2 rounded-lg bg-gray-700 text-white w-full sm:w-full mr-4 mb-4 sm:mb-0 sm:mr-2 text-center font-mono text-lg tracking-wider shadow-inner"
+              className="p-2 rounded-lg bg-gray-700 text-white w-full sm:w-full mb-4 sm:mb-0 text-center font-mono text-lg tracking-wider shadow-inner"
+              style={{ maxWidth: '400px', width: '100%' }} // maxWidth for smaller screens only
             />
 
             <button
-              className={`btn py-3 px-4 rounded-lg font-semibold shadow-md transform transition-all duration-300 ${
-                copied
-                  ? "bg-gradient-to-r w-24 sm:w-24 from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
-                  : "bg-gradient-to-r w-24 sm:w-24 from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
-              }`}
+              className={`btn py-3 px-4 rounded-lg font-semibold shadow-md transform transition-all duration-300 ${copied
+                ? "bg-gradient-to-r w-24 sm:w-24 sm:ml-2 from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
+                : "bg-gradient-to-r w-24 sm:w-24 sm:ml-2 from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white scale-100 hover:scale-[1.02]"
+                }`}
               onClick={copyToClipboard}
             >
               {copied ? "Copied!" : "Copy"}
