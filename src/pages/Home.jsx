@@ -4,6 +4,7 @@ import PasswordGeneratorBox from "../components/PasswordGeneratorBox";
 import Footer from "../components/Footer";
 import Section from "../components/Section";
 import BlogSection from "../components/BlogSection";
+import Faq from "../components/Faq";
 
 const Home = () => {
   return (
@@ -33,6 +34,7 @@ const Home = () => {
       <Section />
       <hr className="border-[#29283c] mt-20" />
       <BlogSection />
+      <Faq />
       <hr className="border-[#29283c] mt-20" />
       <Footer />
     </div>
