@@ -7,10 +7,13 @@ const BlogsList = () => {
     <div className="max-w-screen-xl mx-auto px-4 py-8 mt-20">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div className="border bg-[#212732] p-6 rounded-lg shadow-md hover:bg-[#171b23]">
-          <h3 className="text-xl text-white font-bold mb-4">Blog Title 1</h3>
+          <h3 className="text-xl text-white font-bold mb-4">
+            The Ultimate Guide to Strong Passwords
+          </h3>
           <p className="text-white mb-4">
-            A brief description of the blog post goes here. It provides a quick
-            overview of what the post is about.
+            Discover best practices for creating passwords that are both secure
+            and easy to remember. Learn how to keep your accounts safe with
+            these simple tips.
           </p>
           <a
             href="#"
@@ -20,10 +23,13 @@ const BlogsList = () => {
           </a>
         </div>
         <div className="border bg-[#212732] p-6 rounded-lg shadow-md hover:bg-[#171b23]">
-          <h3 className="text-xl text-white font-bold mb-4">Blog Title 1</h3>
+          <h3 className="text-xl text-white font-bold mb-4">
+            Why Password Managers Are Essential
+          </h3>
           <p className="text-white mb-4">
-            A brief description of the blog post goes here. It provides a quick
-            overview of what the post is about.
+            Explore the benefits of using a password manager to store and manage
+            your passwords securely. Find out how these tools can simplify your
+            digital life.
           </p>
           <a
             href="#"
@@ -33,10 +39,13 @@ const BlogsList = () => {
           </a>
         </div>
         <div className="border bg-[#212732] p-6 rounded-lg shadow-md hover:bg-[#171b23]">
-          <h3 className="text-xl text-white font-bold mb-4">Blog Title 1</h3>
+          <h3 className="text-xl text-white font-bold mb-4">
+            Understanding Password Strength and Complexity
+          </h3>
           <p className="text-white mb-4">
-            A brief description of the blog post goes here. It provides a quick
-            overview of what the post is about.
+            Delve into what makes a password strong and how complexity can
+            enhance security. This guide explains the key elements of password
+            strength.
           </p>
           <a
             href="#"
@@ -46,10 +55,12 @@ const BlogsList = () => {
           </a>
         </div>
         <div className="border bg-[#212732] p-6 rounded-lg shadow-md hover:bg-[#171b23]">
-          <h3 className="text-xl text-white font-bold mb-4">Blog Title 1</h3>
+          <h3 className="text-xl text-white font-bold mb-4">
+            How to Avoid Common Password Mistakes
+          </h3>
           <p className="text-white mb-4">
-            A brief description of the blog post goes here. It provides a quick
-            overview of what the post is about.
+            Learn about the most frequent password-related errors and how to
+            avoid them. Improve your security by avoiding these common pitfalls.
           </p>
           <a
             href="#"
@@ -59,10 +70,13 @@ const BlogsList = () => {
           </a>
         </div>
         <div className="border bg-[#212732] p-6 rounded-lg shadow-md hover:bg-[#171b23]">
-          <h3 className="text-xl text-white font-bold mb-4">Blog Title 1</h3>
+          <h3 className="text-xl text-white font-bold mb-4">
+            The Impact of Password Reuse on Security
+          </h3>
           <p className="text-white mb-4">
-            A brief description of the blog post goes here. It provides a quick
-            overview of what the post is about.
+            Understand the risks associated with reusing passwords across
+            different sites and services. Find out why unique passwords are
+            crucial for your security.
           </p>
           <a
             href="#"
@@ -72,10 +86,13 @@ const BlogsList = () => {
           </a>
         </div>
         <div className="border bg-[#212732] p-6 rounded-lg shadow-md hover:bg-[#171b23]">
-          <h3 className="text-xl text-white font-bold mb-4">Blog Title 1</h3>
+          <h3 className="text-xl text-white font-bold mb-4">
+            Top Tips for Creating Memorable yet Secure Passwords
+          </h3>
           <p className="text-white mb-4">
-            A brief description of the blog post goes here. It provides a quick
-            overview of what the post is about.
+            Get practical advice on crafting passwords that strike a balance
+            between security and memorability. Enhance your password strategy
+            with these helpful tips.
           </p>
           <a
             href="#"
