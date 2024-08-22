@@ -1,11 +1,11 @@
 import "./App.css";
 import About from "./pages/About";
+import Blogs from "./pages/Blogs";
 import Home from "./pages/Home";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
 } from "react-router-dom";
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/blogs" element={<Blogs/>} />
       </Routes>
     </div>
   );
