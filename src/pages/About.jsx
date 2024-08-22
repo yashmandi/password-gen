@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div>
         <Navbar />
-      <div className="container mx-auto p-12 mt-6 text-left text-white pl-36 pr-44">
+      <div className="container mx-auto p-12 mt-6 text-left text-white pl-2 pr-44">
         {/* About Section */}
         <section id="about" className="mb-8">
           <h1 className="text-3xl font-bold mb-4">About PassGen</h1>
