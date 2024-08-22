@@ -5,7 +5,7 @@ const Navbar = () => {
     <div>
       <div className="flex justify-between bg-indigo-600 p-3 pl-4 rounded-xl shadow-xl">
         <Link to="/">
-          <div className="text-2xl sm:text-3xl font-extrabold text-white mx-auto sm:mx-0">
+          <div className="text-2xl sm:text-3xl pl-1 font-extrabold text-white mx-auto sm:mx-0">
             PassGen🔐
           </div>
         </Link>
