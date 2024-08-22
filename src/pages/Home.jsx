@@ -11,17 +11,17 @@ const Home = () => {
     <div className="flex flex-col min-h-screen">
       {" "}
       <Navbar />
-      <div>
-        <p className="text-4xl pt-16 font-bold text-center mt-10 text-white">
+      <div className="text-center px-4 sm:px-0">
+        <p className="text-3xl sm:text-4xl pt-16 font-bold mt-10 text-white">
           Instantly generate a strong, random
           <br />
           password with{" "}
-          <span className="text-[#766cf6] hover:text-indigo-400 font-extrabold  transition cursor-default">
+          <span className="text-[#766cf6] hover:text-indigo-400 font-extrabold transition cursor-default">
             PassGen
           </span>
           🔐
         </p>
-        <p className="text-md text-center mt-4 text-gray-400">
+        <p className="text-sm sm:text-md mt-4 text-gray-400">
           Designed to keep your accounts{" "}
           <span className="text-gray-300 font-semibold">safe</span> and{" "}
           <span className="text-gray-300 font-semibold">secure</span>
@@ -34,7 +34,7 @@ const Home = () => {
       <Section />
       <hr className="border-[#29283c] mt-20" />
       <BlogSection />
-      <hr className="border-[#29283c] mt-8" />
+      <hr className="border-[#29283c] mt-" />
 
       <Faq />
       <div className="mt-40 border-t border-gray-700">
