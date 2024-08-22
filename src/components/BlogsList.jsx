@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 const BlogsList = () => {
   return (
-    <div className="max-w-screen-xl mx-auto px-4 py-8 mt-20">
+    <div className="max-w-screen-xl mx-auto px-4 py-8 mt-12">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div className="border bg-[#212732] p-6 rounded-lg shadow-md hover:bg-[#171b23]">
           <h3 className="text-xl text-white font-bold mb-4">
