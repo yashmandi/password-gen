@@ -142,34 +142,32 @@ const Manager = () => {
           {passwordArray.length === 0 && (
             <div className="text-center text-white">No passwords to show</div>
           )}
-          {passwordArray.length != 0 && (
-            <table className="table-auto w-full border-2 border-white rounded-md shadow-xl overflow-hidden">
-              <thead className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
-                <tr>
-                  <th className="py-2">Site</th>
-                  <th className="py-2">Username</th>
-                  <th className="py-2">Password</th>
-                  <th className="py-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="bg-blue-100">
-                {passwordArray.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td className="py-2 border hover:bg-[#161b20] bg-[#1a2025] transition-all w-80  text-center">
+          {passwordArray.length !== 0 && (
+            <div className="overflow-x-auto">
+              <table className="table-auto w-full border-collapse border border-gray-800">
+                <thead>
+                  <tr className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
+                    <th className="px-4 py-2 border border-gray-800">Site</th>
+                    <th className="px-4 py-2 border border-gray-800">Username</th>
+                    <th className="px-4 py-2 border border-gray-800">Password</th>
+                    <th className="px-4 py-2 border border-gray-800">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {passwordArray.map((item, index) => (
+                    <tr key={index} className="bg-[#1e1d2b] text-white">
+                      <td className="px-4 py-2 border border-gray-800">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank" rel="noreferrer">
                             {item.site}
                           </a>
-                          <div
-                            className="lordiconcopy size-7 cursor-pointer"
-                            onClick={() => {
-                              copyText(item.site);
-                            }}
-                          ></div>
+                          <FaRegCopy
+                            className="ml-2 cursor-pointer"
+                            onClick={() => copyText(item.site)}
+                          />
                         </div>
                       </td>
-                      <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
+                      <td className="px-4 py-2 border border-gray-800">
                         <div className="flex items-center justify-center">
                           {item.username}
                           <FaRegCopy
@@ -178,36 +176,24 @@ const Manager = () => {
                           />
                         </div>
                       </td>
-                      <td className="py-2 border hover:bg-[#161b20] bg-[#1a2025] transition-all border-white text-center w-32">
-                        <div className="flex items-center justify-center relative space-x-2">
-                          <span className="text-sm font-mono mr-2 mt-1 text-white">
-                            {item.password.replace(/./g, "•")}
-                          </span>
-                          <div
-                            className="lordiconcopy text-gray-300 cursor-pointer"
+                      <td className="px-4 py-2 border border-gray-800">
+                        <div className="flex items-center justify-center">
+                          {item.password.replace(/./g, "•")}
+                          <FaRegCopy
+                            className="ml-2 cursor-pointer"
                             onClick={() => copyText(item.password)}
                           />
                         </div>
                       </td>
-                      <td className="py-2 border  hover:bg-[#161b20] bg-[#1a2025] transition-all border-white text-center w-24">
-                        <div className="flex items-center justify-center">
-                          <span
-                            className="cursor-pointer mr-2"
-                            onClick={() => {
-                              editPassword(item.id);
-                            }}
-                          >
-                            <FaRegEdit className="mt-0.5 text-lg text-white hover:text-gray-400" />
-                          </span>
-                          <span
-                            className="cursor-pointer mx-2"
-                            onClick={() => {
-                              deletePassword(item.id);
-                            }}
-                          >
-                            <MdOutlineDelete className="mt-0.5 text-xl text-white hover:text-gray-400" />
-                          </span>
-                        </div>
+                      <td className="px-4 py-2 border border-gray-800 text-center">
+                        <FaRegEdit
+                          className="cursor-pointer mx-2"
+                          onClick={() => editPassword(item.id)}
+                        />
+                        <MdOutlineDelete
+                          className="cursor-pointer mx-2"
+                          onClick={() => deletePassword(item.id)}
+                        />
                       </td>
                     </tr>
                   ))}
@@ -217,10 +203,7 @@ const Manager = () => {
           )}
         </div>
       </div>
-      <div>
-        <hr className="border-gray-800 mt-40" />
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
