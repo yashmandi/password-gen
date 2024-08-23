@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
+import { FaRegCopy } from "react-icons/fa6";
 import { v4 as uuidv4 } from "uuid";
 import Navbar from "../components/Navbar";
+import { FaRegEdit } from "react-icons/fa";
+import { MdOutlineDelete } from "react-icons/md";
 
 const Manager = () => {
   const ref = useRef();
@@ -153,7 +156,7 @@ const Manager = () => {
           )}
           {passwordArray.length != 0 && (
             <table className="table-auto w-full rounded-md overflow-hidden">
-              <thead className="bg-blue-800 text-white">
+              <thead className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
                 <tr>
                   <th className="py-2">Site</th>
                   <th className="py-2">Username</th>
@@ -185,56 +188,42 @@ const Manager = () => {
                             className="lordiconcopy size-7 cursor-pointer"
                             onClick={() => copyText(item.username)}
                           >
-                            <lord-icon
-                              style={{ width: 25, height: 25, padding: "5px" }}
-                              className="cursor-pointer"
-                              src="https://cdn.lordicon.com/iykgtsbt.json"
-                              trigger="hover"
-                            ></lord-icon>
+                            <FaRegCopy className="mt-1.5 text-white hover:text-gray-400" />
                           </div>
                         </div>
                       </td>
                       <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
-                        <div className="flex items-center justify-center">
-                          <span>{item.password}</span>
+                        <div className="flex items-center justify-center relative space-x-2">
+                          <span className="text-sm font-mono">
+                            {item.password.replace(/./g, "•")}
+                          </span>
                           <div
-                            className="lordiconcopy size-7 cursor-pointer"
+                            className="lordiconcopy text-gray-300 cursor-pointer"
                             onClick={() => copyText(item.password)}
                           >
-                            <lord-icon
-                              style={{ width: 25, height: 25, padding: "5px" }}
-                              className="cursor-pointer"
-                              src="https://cdn.lordicon.com/iykgtsbt.json"
-                              trigger="hover"
-                            ></lord-icon>
+                            <FaRegCopy className="mt-0.5 text-white hover:text-gray-400" />
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
-                        <span
-                          className="cursor-pointer mx-2"
-                          onClick={() => {
-                            editPassword(item.id);
-                          }}
-                        >
-                          <lord-icon
-                            src="https://cdn.lordicon.com/gwlusjdu.json"
-                            trigger="hover"
-                            style={{ width: "25px", height: "25px" }}
-                          ></lord-icon>
-                        </span>
-                        <span
-                          className="cursor-pointer mx-2"
-                          onClick={() => {
-                            deletePassword(item.id);
-                          }}
-                        >
-                          <lord-icon
-                            src="https://cdn.lordicon.com/skkahier.json"
-                            trigger="hover"
-                            style={{ width: "25px", height: "25px" }}
-                          ></lord-icon>
-                        </span>
+                      <td className="py-2 border  bg-[#1e1d2b] border-white text-center w-32">
+                        <div className="flex items-center justify-center">
+                          <span
+                            className="cursor-pointer mx-2"
+                            onClick={() => {
+                              editPassword(item.id);
+                            }}
+                          >
+                            <FaRegEdit className="mt-0.5 text-lg text-white hover:text-gray-400" />
+                          </span>
+                          <span
+                            className="cursor-pointer mx-2"
+                            onClick={() => {
+                              deletePassword(item.id);
+                            }}
+                          >
+                            <MdOutlineDelete className="mt-0.5 text-xl text-white hover:text-gray-400" />
+                          </span>
+                        </div>
                       </td>
                     </tr>
                   );
