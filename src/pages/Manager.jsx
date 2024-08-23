@@ -182,7 +182,7 @@ const Manager = () => {
                 {passwordArray.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="py-2 border bg-[#1e1d2b] w-80  text-center">
+                      <td className="py-2 border hover:bg-[#161b20] bg-[#1a2025] transition-all w-80  text-center">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank">
                             {item.site}
@@ -192,10 +192,10 @@ const Manager = () => {
                             onClick={() => {
                               copyText(item.site);
                             }}
-                          ></div>
+                          ><FaRegCopy className="mt-1 ml-4 text-white hover:text-gray-400" /></div>
                         </div>
                       </td>
-                      <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
+                      <td className="py-2 border hover:bg-[#161b20] bg-[#1a2025] transition-all border-white text-center w-32">
                         <div className="flex items-center justify-center">
                           <span className="mr-3">{item.username}</span>
                           <div
@@ -206,7 +206,7 @@ const Manager = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
+                      <td className="py-2 border hover:bg-[#161b20] bg-[#1a2025] transition-all border-white text-center w-32">
                         <div className="flex items-center justify-center relative space-x-2">
                           <span className="text-sm font-mono mr-2 mt-1 text-white">
                             {item.password.replace(/./g, "•")}
@@ -219,7 +219,7 @@ const Manager = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 border  bg-[#1e1d2b] border-white text-center w-24">
+                      <td className="py-2 border  hover:bg-[#161b20] bg-[#1a2025] transition-all border-white text-center w-24">
                         <div className="flex items-center justify-center">
                           <span
                             className="cursor-pointer mr-2"
@@ -248,7 +248,7 @@ const Manager = () => {
         </div>
       </div>
       <div>
-        <hr className="border-gray-800 mt-40"/>
+        <hr className="border-gray-800 mt-40" />
         <Footer />
       </div>
     </div>
