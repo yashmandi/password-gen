@@ -17,14 +17,13 @@ const ManagerSection = () => {
 
             <div className="lg:py-24">
               <h2 className="text-3xl font-bold text-white sm:text-4xl">
-                Grow your audience
+                Securely Manage Passwords
               </h2>
 
               <p className="mt-4 text-gray-300">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
-                qui hic atque tenetur quis eius quos ea neque sunt, accusantium
-                soluta minus veniam tempora deserunt? Molestiae eius quidem quam
-                repellat.
+                Easily store and manage all your passwords in one place. Protect
+                your data with encrypted storage and a user-friendly interface.
+                Access your saved credentials securely from any device.
               </p>
               <Link to="/password-manager">
                 <button className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-4 rounded-lg text-white text-sm mt-6 sm:text-md w-full sm:w-64 font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:shadow-2xl">
