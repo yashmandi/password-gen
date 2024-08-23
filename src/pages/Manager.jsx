@@ -82,7 +82,9 @@ const Manager = () => {
         <div className="py-16">
           <div className="text-center">
             <h1 className=" font-bold text-white mb-2">
-              <span className="text-indigo-500 text-3xl sm:text-4xl">PassGen🔐</span>{" "}
+              <span className="text-indigo-500 text-3xl sm:text-4xl">
+                PassGen🔐
+              </span>{" "}
               <br />
               <span className="text-xl sm:text-3xl">Password Manager</span>
             </h1>
@@ -215,7 +217,10 @@ const Manager = () => {
           )}
         </div>
       </div>
-      <Footer />
+      <div>
+        <hr className="border-gray-800 mt-24"/>
+        <Footer />
+      </div>
     </div>
   );
 };
