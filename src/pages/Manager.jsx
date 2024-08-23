@@ -86,11 +86,11 @@ const Manager = () => {
           </p>
         </div>
 
-        <div className="text-white flex flex-col p-4 text-black gap-3 items-center">
+        <div className="text-white flex flex-col p-4 text-white gap-3 items-center">
           <input
             value={form.site}
             onChange={handleChange}
-            className="rounded-xl border text-black border-blue-800 p-4 py-1 w-full"
+            className="rounded-xl border text-white p-3 py-2 w-full"
             placeholder="Enter Website URL"
             type="text"
             name="site"
@@ -101,7 +101,7 @@ const Manager = () => {
             <input
               value={form.username}
               onChange={handleChange}
-              className="rounded-xl border text-black border-blue-800 p-4 py-1 w-[300px]"
+              className="rounded-xl border text-white  p-3 py-2 w-[300px]"
               placeholder="Enter Username"
               type="text"
               name="username"
@@ -113,7 +113,7 @@ const Manager = () => {
                 ref={passwordRef}
                 value={form.password}
                 onChange={handleChange}
-                className="rounded-xl text-black border border-blue-800 p-4 py-1 w-[300px]"
+                className="rounded-xl text-white border p-3 py-2 w-[300px]"
                 placeholder="Enter Password"
                 type="password"
                 name="password"
@@ -128,7 +128,7 @@ const Manager = () => {
                   src="icons/open-eye.png"
                   width={20}
                   height={40}
-                  className="mt-[7px] mr-2"
+                  className="mt-[7px] mr-2 filter invert"
                   alt="eye"
                 />
               </span>
@@ -138,16 +138,12 @@ const Manager = () => {
             onClick={savePassword}
             className="flex gap-3 mt-2 justify-center items-center bg-blue-500 hover:bg-blue-400 rounded-xl px-1 py-1 w-32 "
           >
-            <lord-icon
-              src="https://cdn.lordicon.com/jgnvfzqg.json"
-              trigger="hover"
-            ></lord-icon>{" "}
             Save
           </button>
         </div>
 
         <div className="passwords">
-          <h2 className="text-2xl font-bold text-center py-4">
+          <h2 className="text-2xl text-white font-bold text-center py-4">
             Your Passwords
           </h2>
           {passwordArray.length === 0 && (
@@ -163,11 +159,11 @@ const Manager = () => {
                   <th className="py-2">Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-blue-100 ">
+              <tbody className="bg-blue-100">
                 {passwordArray.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="py-2 border border-white text-center">
+                      <td className="py-2 border bg-[#1e1d2b] border-white text-center">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank">
                             {item.site}
@@ -178,16 +174,10 @@ const Manager = () => {
                               copyText(item.site);
                             }}
                           >
-                            <lord-icon
-                              style={{ width: 25, height: 25, padding: "5px" }}
-                              className="cursor-pointer"
-                              src="https://cdn.lordicon.com/iykgtsbt.json"
-                              trigger="hover"
-                            ></lord-icon>
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 border border-white text-center w-32">
+                      <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
                         <div className="flex items-center justify-center">
                           <span>{item.username}</span>
                           <div
@@ -203,7 +193,7 @@ const Manager = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 border border-white text-center w-32">
+                      <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
                         <div className="flex items-center justify-center">
                           <span>{item.password}</span>
                           <div
@@ -219,7 +209,7 @@ const Manager = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 border border-white text-center w-32">
+                      <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
                         <span
                           className="cursor-pointer mx-2"
                           onClick={() => {
