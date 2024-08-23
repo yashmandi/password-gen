@@ -155,7 +155,7 @@ const Manager = () => {
             <div className="text-center">No passwords to show</div>
           )}
           {passwordArray.length != 0 && (
-            <table className="table-auto w-full rounded- border rounded-md shadow-xl overflow-hidden">
+            <table className="table-auto w-full border-2 border-white rounded-md shadow-xl overflow-hidden">
               <thead className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
                 <tr>
                   <th className="py-2">Site</th>
@@ -167,8 +167,8 @@ const Manager = () => {
               <tbody className="bg-blue-100">
                 {passwordArray.map((item, index) => {
                   return (
-                    <tr key={index}>
-                      <td className="py-2 border bg-[#1e1d2b] w-80 border-white text-center">
+                    <tr key={index} >
+                      <td className="py-2 border bg-[#1e1d2b] w-80  text-center">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank">
                             {item.site}
@@ -183,9 +183,9 @@ const Manager = () => {
                       </td>
                       <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
                         <div className="flex items-center justify-center">
-                          <span>{item.username}</span>
+                          <span className="mr-3">{item.username}</span>
                           <div
-                            className="lordiconcopy size-7 cursor-pointer"
+                            className="lordiconcopy size-7  cursor-pointer"
                             onClick={() => copyText(item.username)}
                           >
                             <FaRegCopy className="mt-1.5 text-white hover:text-gray-400" />
@@ -194,7 +194,7 @@ const Manager = () => {
                       </td>
                       <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
                         <div className="flex items-center justify-center relative space-x-2">
-                          <span className="text-sm font-mono">
+                          <span className="text-sm font-mono mr-2">
                             {item.password.replace(/./g, "•")}
                           </span>
                           <div
@@ -205,10 +205,10 @@ const Manager = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 border  bg-[#1e1d2b] border-white text-center w-32">
+                      <td className="py-2 border  bg-[#1e1d2b] border-white text-center w-24">
                         <div className="flex items-center justify-center">
                           <span
-                            className="cursor-pointer mx-2"
+                            className="cursor-pointer mr-2"
                             onClick={() => {
                               editPassword(item.id);
                             }}
