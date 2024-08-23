@@ -133,7 +133,7 @@ const Manager = () => {
                   src="icons/open-eye.png"
                   width={20}
                   height={40}
-                  className="mt-[7px] mr-2 filter invert"
+                  className="mt-[10px] mr-3 filter invert"
                   alt="eye"
                 />
               </span>
@@ -194,7 +194,7 @@ const Manager = () => {
                       </td>
                       <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
                         <div className="flex items-center justify-center relative space-x-2">
-                          <span className="text-sm font-mono mr-2">
+                          <span className="text-sm font-mono mr-2 mt-1 text-white">
                             {item.password.replace(/./g, "•")}
                           </span>
                           <div
