@@ -80,17 +80,19 @@ const Manager = () => {
       <Navbar />
       <div className="p-2 md:p-0 md:mycontainer ">
         <div className="p-4 flex flex-col justify-center mt-10">
-          <h1 className="text-3xl font-bold py-3 text-white text-center">PassGen Password Manager</h1>
+          <h1 className="text-3xl font-bold py-3 text-white text-center">
+            PassGen Password Manager
+          </h1>
           <p className="text-center text-md mt-[-4px] text-white">
             Unlock Security with PassGen
           </p>
         </div>
 
-        <div className="text-white flex flex-col p-4 text-white gap-3 items-center">
+        <div className="text-white flex flex-col p-4  text-white gap-3 items-center">
           <input
             value={form.site}
             onChange={handleChange}
-            className="rounded-xl border text-white p-3 py-2 w-full"
+            className="rounded-xl border bg-[#171c21] text-white p-3 py-2 w-full"
             placeholder="Enter Website URL"
             type="text"
             name="site"
@@ -101,7 +103,7 @@ const Manager = () => {
             <input
               value={form.username}
               onChange={handleChange}
-              className="rounded-xl border text-white  p-3 py-2 w-[300px]"
+              className="rounded-xl border text-white bg-[#171c21]  p-3 py-2 w-[300px]"
               placeholder="Enter Username"
               type="text"
               name="username"
@@ -113,7 +115,7 @@ const Manager = () => {
                 ref={passwordRef}
                 value={form.password}
                 onChange={handleChange}
-                className="rounded-xl text-white border p-3 py-2 w-[300px]"
+                className="rounded-xl text-white bg-[#171c21] border p-3 py-2 w-[300px]"
                 placeholder="Enter Password"
                 type="password"
                 name="password"
@@ -136,7 +138,7 @@ const Manager = () => {
           </div>
           <button
             onClick={savePassword}
-            className="flex gap-3 mt-2 justify-center items-center bg-blue-500 hover:bg-blue-400 rounded-xl px-1 py-1 w-32 "
+            className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg text-white text-sm sm:text-sm w-full sm:w-24 mt-4 font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
           >
             Save
           </button>
@@ -173,8 +175,7 @@ const Manager = () => {
                             onClick={() => {
                               copyText(item.site);
                             }}
-                          >
-                          </div>
+                          ></div>
                         </div>
                       </td>
                       <td className="py-2 border bg-[#1e1d2b] border-white text-center w-32">
