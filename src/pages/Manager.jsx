@@ -81,8 +81,10 @@ const Manager = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-16">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-white mb-2">
-              <span className="text-indigo-500">PassGen</span> Password Manager
+            <h1 className=" font-bold text-white mb-2">
+              <span className="text-indigo-500 text-3xl sm:text-4xl">PassGen🔐</span>{" "}
+              <br />
+              <span className="text-xl sm:text-3xl">Password Manager</span>
             </h1>
             <p className="text-md text-white">Unlock Security with PassGen!</p>
           </div>
