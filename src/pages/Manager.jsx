@@ -95,21 +95,21 @@ const Manager = () => {
   return (
     <div>
       <Navbar />
-      <div className="p-2 md:p-0 md:mycontainer ">
+      <div className="p-2 md:p-0 md:mycontainer mt-24">
         <div className="p-4 flex flex-col justify-center mt-10">
-          <h1 className="text-3xl font-bold py-3 text-white text-center">
-            PassGen Password Manager
+          <h1 className="text-4xl font-bold py-3 text-white text-center">
+            <span className="text-indigo-500">PassGen</span> Password Manager
           </h1>
-          <p className="text-center text-md mt-[-4px] text-white">
-            Unlock Security with PassGen
+          <p className="text-center text-md mt-[-6px] mb-4 text-white">
+            Unlock Security with PassGen!
           </p>
         </div>
 
-        <div className="text-white flex flex-col p-4  text-white gap-3 items-center">
+        <div className="text-white flex flex-col p-4 text-white gap-3 items-center">
           <input
             value={form.site}
             onChange={handleChange}
-            className="rounded-xl border bg-[#171c21] text-white p-3 py-2 w-full"
+            className="rounded-xl border bg-[#171c21] text-white p-3 py-2 w-4/5"
             placeholder="Enter Website URL"
             type="text"
             name="site"
