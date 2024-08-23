@@ -155,7 +155,7 @@ const Manager = () => {
             <div className="text-center">No passwords to show</div>
           )}
           {passwordArray.length != 0 && (
-            <table className="table-auto w-full rounded-md overflow-hidden">
+            <table className="table-auto w-full rounded- border rounded-md shadow-xl overflow-hidden">
               <thead className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
                 <tr>
                   <th className="py-2">Site</th>
@@ -168,7 +168,7 @@ const Manager = () => {
                 {passwordArray.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="py-2 border bg-[#1e1d2b] border-white text-center">
+                      <td className="py-2 border bg-[#1e1d2b] w-80 border-white text-center">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank">
                             {item.site}
