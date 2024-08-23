@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Section from "../components/Section";
 import BlogSection from "../components/BlogSection";
 import Faq from "../components/Faq";
+import ManagerSection from "../components/ManagerSection";
 
 const Home = () => {
   return (
@@ -31,11 +32,12 @@ const Home = () => {
         <PasswordGeneratorBox />
         <hr className="border-[#29283c] mt-24" />
       </main>
+      <ManagerSection />
+      <hr className="border-[#29283c] mt-20" />
       <Section />
       <hr className="border-[#29283c] mt-20" />
       <BlogSection />
       <hr className="border-[#29283c] mt-" />
-
       <Faq />
       <div className="mt-40 border-t border-gray-700">
         <Footer />
