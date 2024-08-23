@@ -38,17 +38,30 @@ const Manager = () => {
     }
   };
 
-  const savePassword = async () => {
-    setPasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
-    let res = await fetch("https://localhost:3000/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...form, id: uuidv4() }),
-    });
-    // localStorage.setItem("password", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
-    // console.log([...passwordArray, form]);
+  //   const savePassword = async () => {
+  //     setPasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+  //     let res = await fetch("https://localhost:3000/", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ ...form, id: uuidv4() }),
+  //     });
+  //     localStorage.setItem("password", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
+  //     console.log([...passwordArray, form]);
+  //     setform({ site: "", username: "", password: "" });
+  //   };
+
+  const savePassword = () => {
+    const newPassword = { ...form, id: uuidv4() };
+    const updatedPasswordArray = [...passwordArray, newPassword];
+
+    setPasswordArray(updatedPasswordArray);
+
+    // Save to localStorage
+    localStorage.setItem("passwords", JSON.stringify(updatedPasswordArray));
+
+    // Reset the form fields
     setform({ site: "", username: "", password: "" });
   };
 
@@ -167,7 +180,7 @@ const Manager = () => {
               <tbody className="bg-blue-100">
                 {passwordArray.map((item, index) => {
                   return (
-                    <tr key={index} >
+                    <tr key={index}>
                       <td className="py-2 border bg-[#1e1d2b] w-80  text-center">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank">
