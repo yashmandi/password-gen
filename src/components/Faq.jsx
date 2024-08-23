@@ -45,16 +45,16 @@ const Faq = () => {
                             onClick={() => toggleAccordion(index)}
                         >
                             {item.question}
-                        </button>
-                        <div
-                            className={`transition-max-height duration-500 ease-in-out overflow-hidden ${activeIndex === index ? 'max-h-screen' : 'max-h-0'
-                                }`}
-                            style={{ maxHeight: activeIndex === index ? '100px' : '0' }}
-                        >
-                            <div className="p-3 text-center rounded-lg text-white">
-                                {item.answer}
+                            <div
+                                className={`transition-max-height duration-500 ease-in-out overflow-hidden ${activeIndex === index ? 'max-h-screen' : 'max-h-0'
+                                    }`}
+                                style={{ maxHeight: activeIndex === index ? '100px' : '0' }}
+                            >
+                                <div className="p-3 text-center rounded-lg text-white">
+                                    {item.answer}
+                                </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 ))}
             </section>
