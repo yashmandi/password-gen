@@ -53,11 +53,14 @@ const Navbar = () => {
           {/* Mobile Menu Dropdown */}
           <div
             ref={dropdownRef}
-            className={`absolute right-0 mt-48 w-36 bg-gray-800 h-[115px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? 'scale-100' : 'scale-0'} origin-top-right`}
+            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? 'scale-100' : 'scale-0'} origin-top-right`}
           >
             <div className="py-2">
+            <Link to="/password-manager">
+                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">Password Manager</div>
+              </Link>
               <Link to="/blogs">
-                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">Blog</div>
+                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">Blogs</div>
               </Link>
               <Link to="/about">
                 <div className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer">About</div>
@@ -74,9 +77,14 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden sm:flex gap-4 sm:gap-6 mt-1.5">
+        <Link to="/password-manager">
+            <div className="hover:text-white text-gray-300 cursor-pointer transition">
+              Password Manager
+            </div>
+          </Link>
           <Link to="/blogs">
             <div className="hover:text-white text-gray-300 cursor-pointer transition">
-              Blog
+              Blogs
             </div>
           </Link>
           <Link to="/about">
