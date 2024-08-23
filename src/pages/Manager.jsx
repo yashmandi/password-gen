@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Navbar from "../components/Navbar";
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
+import Footer from "../components/Footer";
 
 const Manager = () => {
   const ref = useRef();
@@ -245,6 +246,10 @@ const Manager = () => {
             </table>
           )}
         </div>
+      </div>
+      <div>
+        <hr className="border-gray-800 mt-40"/>
+        <Footer />
       </div>
     </div>
   );
