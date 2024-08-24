@@ -267,7 +267,9 @@ const Manager = () => {
         </div>
       </div>
 
-      <Footer />
+      <div className="mt-40 border-t border-gray-700">
+        <Footer />
+      </div>
 
       {/* Add the ConfirmationModal component here */}
       <ConfirmationModal
