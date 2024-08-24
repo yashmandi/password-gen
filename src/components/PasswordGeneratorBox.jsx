@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const PasswordGeneratorBox = () => {
   const [password, setPassword] = useState("");
@@ -18,8 +19,36 @@ const PasswordGeneratorBox = () => {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(password);
-    setCopied(true);
+    navigator.clipboard.writeText(password)
+      .then(() => {
+        setCopied(true);
+        toast.success("Copied to Clipboard!", {
+          position: "bottom-left",
+          style: {
+            fontSize: "13px",
+            backgroundColor: "rgba(46, 46, 46, 0.8)",
+            color: "#fff",
+            maxWidth: "400px",
+            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+            borderRadius: "8px",
+            borderColor: "rgba(0, 0, 0, 0.8)",
+          },
+        });
+      })
+      .catch(() => {
+        toast.error("Error Copying to Clipboard. Try again.", {
+          position: "bottom-left",
+          style: {
+            fontSize: "13px",
+            backgroundColor: "rgba(46, 46, 46, 0.8)",
+            color: "#fff",
+            maxWidth: "400px",
+            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+            borderRadius: "8px",
+            borderColor: "rgba(0, 0, 0, 0.8)",
+          },
+        });
+      });
   };
 
   return (

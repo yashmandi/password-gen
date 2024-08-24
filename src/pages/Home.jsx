@@ -6,11 +6,11 @@ import Section from "../components/Section";
 import BlogSection from "../components/BlogSection";
 import Faq from "../components/Faq";
 import ManagerSection from "../components/ManagerSection";
+import { Toaster } from "react-hot-toast";
 
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      {" "}
       <Navbar />
       <div className="text-center px-4 sm:px-0">
         <p className="text-3xl sm:text-4xl pt-16 font-bold mt-10 text-white">
@@ -42,6 +42,8 @@ const Home = () => {
       <div className="mt-40 border-t border-gray-700">
         <Footer />
       </div>
+      {/* Toaster to display the toast messages */}
+      <Toaster />
     </div>
   );
 };
