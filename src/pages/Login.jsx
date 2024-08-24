@@ -1,16 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
     <div>
-        <Navbar/>
+      <Navbar />
       <section class="">
         <div class="flex flex-col items-center justify-center  mx-auto md:h-auto mt-20 lg:py-0">
-              <h1 class="text-2xl  font-bold leading-tight tracking-tight text-white md:text-3xl mb-6">
-                Sign in to your account!
-              </h1>
+          <h1 class="text-2xl  font-bold leading-tight tracking-tight text-white md:text-3xl mb-6">
+            Sign in to your account!
+          </h1>
           <div class="w-full bg-gradient-to-b from-[#243242] to-[#20272f] rounded-lg shadow-xl  md:mt-0 sm:max-w-md xl:p-0 ">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <form class="space-y-4 md:space-y-6" action="#">
@@ -81,12 +82,11 @@ const Login = () => {
                 </button>
                 <p class="text-sm font-light  text-gray-300 ">
                   Don’t have an account yet?{" "}
-                  <a
-                    href="#"
-                    class="font-medium hover:text-white text-gray-300 hover:underline transition-all dark:text-primary-500"
-                  >
-                    Sign up
-                  </a>
+                  <Link to="/signup">
+                    <button class="font-medium hover:text-white text-gray-300 hover:underline transition-all dark:text-primary-500">
+                      Sign up
+                    </button>
+                  </Link>
                 </p>
               </form>
             </div>
