@@ -5,6 +5,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { toast } from "react-hot-toast"; // Import react-hot-toast
 
 const Manager = () => {
   const ref = useRef();
@@ -38,6 +39,25 @@ const Manager = () => {
   };
 
   const savePassword = () => {
+    const { site, username, password } = form;
+
+    // Check if any field is empty
+    if (!site || !username || !password) {
+      toast.error("All fields are required.", {
+        position: "bottom-left",
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+      return;
+    }
+
     const newPassword = { ...form, id: uuidv4() };
     const updatedPasswordArray = [...passwordArray, newPassword];
 
@@ -48,6 +68,20 @@ const Manager = () => {
 
     // Reset the form fields
     setform({ site: "", username: "", password: "" });
+
+    // Show success toast notification
+    toast.success("Password saved!", {
+      position: "bottom-left",
+      style: {
+        fontSize: "13px",
+        backgroundColor: "rgba(46, 46, 46, 0.8)",
+        color: "#fff",
+        maxWidth: "400px",
+        boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+        borderRadius: "8px",
+        borderColor: "rgba(0, 0, 0, 0.8)",
+      },
+    });
   };
 
   const deletePassword = async (id) => {
@@ -81,7 +115,7 @@ const Manager = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-16">
           <div className="text-center">
-            <h1 className=" font-bold text-white mb-2">
+            <h1 className="font-bold text-white mb-2">
               <span className="text-indigo-500 text-3xl sm:text-4xl">
                 PassGen🔐
               </span>{" "}
@@ -218,7 +252,7 @@ const Manager = () => {
         </div>
       </div>
       <div>
-        <hr className="border-gray-800 mt-24"/>
+        <hr className="border-gray-800 mt-24" />
         <Footer />
       </div>
     </div>

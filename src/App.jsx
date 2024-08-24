@@ -4,6 +4,9 @@ import Blogs from "./pages/Blogs";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Manager from "./pages/Manager";
+import { Toaster } from "react-hot-toast";
+
+
 function App() {
   return (
     <div>
@@ -19,6 +22,7 @@ function App() {
 
 const AppWithRouter = () => (
   <Router>
+    <Toaster /> {/* Add this line */}
     <App />
   </Router>
 );
