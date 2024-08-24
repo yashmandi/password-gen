@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
-import { useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaRegCopy, FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { toast } from "react-hot-toast"; // Import react-hot-toast
+import { toast } from "react-hot-toast";
+import ConfirmationModal from "../components/ConfirmationModal"; // Import the modal
 
 const Manager = () => {
   const ref = useRef();
   const passwordRef = useRef();
   const [form, setform] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setPasswordArray] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [passwordToDelete, setPasswordToDelete] = useState(null);
 
   const getPasswords = async () => {
     let req = fetch("https://localhost:3000/");
@@ -41,7 +43,6 @@ const Manager = () => {
   const savePassword = () => {
     const { site, username, password } = form;
 
-    // Check if any field is empty
     if (!site || !username || !password) {
       toast.error("All fields are required.", {
         position: "bottom-left",
@@ -62,14 +63,10 @@ const Manager = () => {
     const updatedPasswordArray = [...passwordArray, newPassword];
 
     setPasswordArray(updatedPasswordArray);
-
-    // Save to localStorage
     localStorage.setItem("passwords", JSON.stringify(updatedPasswordArray));
 
-    // Reset the form fields
     setform({ site: "", username: "", password: "" });
 
-    // Show success toast notification
     toast.success("Password saved!", {
       position: "bottom-left",
       style: {
@@ -84,20 +81,38 @@ const Manager = () => {
     });
   };
 
-  const deletePassword = async (id) => {
-    let confirmDelete = confirm(
-      "Are you sure you want to delete this password?"
+  const handleDeletePassword = (id) => {
+    setIsModalOpen(true);
+    setPasswordToDelete(id);
+  };
+
+  const confirmDelete = async () => {
+    setPasswordArray(
+      passwordArray.filter((item) => item.id !== passwordToDelete)
     );
-    if (confirmDelete) {
-      setPasswordArray(passwordArray.filter((item) => item.id !== id));
-      let res = await fetch("https://localhost:3000/", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...form, id }),
-      });
-    }
+    await fetch("https://localhost:3000/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: passwordToDelete }),
+    });
+    setIsModalOpen(false);
+    setPasswordToDelete(null);
+    toast.success("Password deleted!", {
+      position: "bottom-left",
+      style: {
+        fontSize: "13px",
+        backgroundColor: "rgba(46, 46, 46, 0.8)",
+        color: "#fff",
+        maxWidth: "400px",
+        boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+        borderRadius: "8px",
+        borderColor: "rgba(0, 0, 0, 0.8)",
+      },
+    });
+
+    setIsModalOpen(false);
   };
 
   const editPassword = (id) => {
@@ -231,15 +246,15 @@ const Manager = () => {
                           />
                         </div>
                       </td>
-                      <td className="px-4 py-3 border border-gray-800 text-center">
+                      <td className="px-4 py-2 border border-gray-800">
                         <div className="flex items-center justify-center">
                           <FaRegEdit
-                            className="cursor-pointer mx-2 text-xl hover:text-gray-400 transition"
+                            className="text-xl cursor-pointer text-white hover:text-gray-300 transition"
                             onClick={() => editPassword(item.id)}
                           />
                           <MdOutlineDelete
-                            className="cursor-pointer mx-2 text-2xl hover:text-gray-400 transition"
-                            onClick={() => deletePassword(item.id)}
+                            className="ml-4 text-2xl cursor-pointer text-white hover:text-red-400 transition"
+                            onClick={() => handleDeletePassword(item.id)}
                           />
                         </div>
                       </td>
@@ -251,10 +266,15 @@ const Manager = () => {
           )}
         </div>
       </div>
-      <div>
-        <hr className="border-gray-800 mt-24" />
-        <Footer />
-      </div>
+
+      <Footer />
+
+      {/* Add the ConfirmationModal component here */}
+      <ConfirmationModal
+        show={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
 };
