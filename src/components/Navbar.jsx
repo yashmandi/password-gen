@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { MdLogin } from "react-icons/md";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,17 +54,25 @@ const Navbar = () => {
           {/* Mobile Menu Dropdown */}
           <div
             ref={dropdownRef}
-            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? 'scale-100' : 'scale-0'} origin-top-right`}
+            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${
+              isOpen ? "scale-100" : "scale-0"
+            } origin-top-right`}
           >
             <div className="py-2">
-            <Link to="/password-manager">
-                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">Password Manager</div>
+              <Link to="/password-manager">
+                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">
+                  Password Manager
+                </div>
               </Link>
               <Link to="/blogs">
-                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">Blogs</div>
+                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">
+                  Blogs
+                </div>
               </Link>
               <Link to="/about">
-                <div className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer">About</div>
+                <div className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer">
+                  About
+                </div>
               </Link>
               <a
                 target="_blank"
@@ -76,8 +85,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
         <div className="hidden sm:flex gap-4 sm:gap-6 mt-1.5">
-        <Link to="/password-manager">
+          <Link to="/password-manager">
             <div className="hover:text-white text-gray-300 cursor-pointer transition">
               Password Manager
             </div>
@@ -92,7 +102,7 @@ const Navbar = () => {
               About
             </div>
           </Link>
-          <a
+          {/* <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/yashmandi/password-gen"
@@ -101,7 +111,13 @@ const Navbar = () => {
             <div className="hover:text-white text-gray-300 cursor-pointer transition  mr-2">
               GitHub
             </div>
-          </a>
+          </a> */}
+          <Link to="/about">
+            <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
+              Login
+              {/* <MdLogin className="text-2xl font-extrabold"/> */}
+            </div>
+          </Link>
         </div>
       </div>
     </div>

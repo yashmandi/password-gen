@@ -44,7 +44,7 @@ const Manager = () => {
     const { site, username, password } = form;
 
     if (!site || !username || !password) {
-      toast.error("All fields are required.", {
+      toast.error("All fields are required", {
         position: "bottom-left",
         style: {
           fontSize: "13px",
@@ -128,7 +128,7 @@ const Manager = () => {
     <div>
       <Navbar />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-16">
+        <div className="py-24">
           <div className="text-center">
             <h1 className="font-bold text-white mb-2">
               <span className="text-indigo-500 text-3xl sm:text-4xl">
@@ -137,7 +137,7 @@ const Manager = () => {
               <br />
               <span className="text-xl sm:text-3xl">Password Manager</span>
             </h1>
-            <p className="text-md text-white">Unlock Security with PassGen!</p>
+            <p className="text-md text-white">Your Personal Password Manager!</p>
           </div>
           <div className="max-w-md mx-auto mt-10">
             <input
