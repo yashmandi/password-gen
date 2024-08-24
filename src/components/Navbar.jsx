@@ -112,7 +112,7 @@ const Navbar = () => {
               GitHub
             </div>
           </a> */}
-          <Link to="/about">
+          <Link to="/login">
             <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
               Login
               {/* <MdLogin className="text-2xl font-extrabold"/> */}

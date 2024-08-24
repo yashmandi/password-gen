@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Manager from "./pages/Manager";
 import { Toaster } from "react-hot-toast";
-
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/password-manager" element={<Manager />} />
+        <Route path="/Login" element={<Login />} />
       </Routes>
     </div>
   );
