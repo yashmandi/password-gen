@@ -7,7 +7,6 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 const Login = () => {
   return (
     <div>
-      {/* Back to Home Button */}
       <div className="absolute top-8 left-8">
         <Link to="/">
           <button className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-4 rounded-lg text-white text-sm font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:shadow-2xl">
