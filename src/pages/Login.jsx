@@ -2,11 +2,20 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Login = () => {
   return (
     <div>
-      <Navbar />
+      {/* Back to Home Button */}
+      <div className="absolute top-8 left-8">
+        <Link to="/">
+          <button className="btn bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 px-4 rounded-lg text-white text-sm font-semibold tracking-wide shadow-lg transform transition-transform duration-300 hover:shadow-2xl">
+            <IoMdArrowRoundBack className="text-xl m-[-0.5rem]" />
+            <span className="ml-1 mr-[-0.3rem]">Back to Home</span>
+          </button>
+        </Link>
+      </div>
       <section class="">
         <div class="flex flex-col items-center justify-center  mx-auto md:h-auto mt-20 lg:py-0">
           <h1 class="text-2xl  font-bold leading-tight tracking-tight text-white md:text-3xl mb-6">
