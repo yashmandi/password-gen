@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { toast } from "react-hot-toast";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
@@ -12,59 +13,38 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Basic validation
+    console.log("Form submitted");
+
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    
+
     try {
       const response = await fetch("http://localhost:3000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          fullName,
-          email,
-          password,
-        }),
+        body: JSON.stringify({ fullName, email, password }),
       });
 
       const data = await response.json();
-      
+      console.log("Response data:", data);
+
       if (response.ok) {
-        toast.success("Registration successful!", {
-          position: "bottom-left",
-          style: {
-            fontSize: "13px",
-            backgroundColor: "rgba(46, 46, 46, 0.8)",
-            color: "#fff",
-            maxWidth: "400px",
-            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-            borderRadius: "8px",
-            borderColor: "rgba(0, 0, 0, 0.8)",
-          },
-        });
+        console.log("Registration successful, navigating to home");
+        toast.success("Registration successful!");
         navigate("/");
       } else {
+        console.log("Registration failed:", data.message);
         setError(data.message || "Registration failed");
-        toast.error("Registration failed. Please try again.", {
-          position: "bottom-left",
-          style: {
-            fontSize: "13px",
-            backgroundColor: "rgba(46, 46, 46, 0.8)",
-            color: "#fff",
-            maxWidth: "400px",
-            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-            borderRadius: "8px",
-            borderColor: "rgba(0, 0, 0, 0.8)",
-          },
-        });
+        toast.error(data.message || "Registration failed. Please try again.");
       }
     } catch (err) {
+      console.error("Error during registration:", err);
       setError("Server error");
+      toast.error("Server error. Please try again.");
     }
   };
 
