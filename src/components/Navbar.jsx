@@ -1,10 +1,36 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MdLogin } from "react-icons/md";
+
+// Function to get initials from a full name
+export const getInitials = (name) => {
+    if (!name) return "";
+
+    const words = name.trim().split(" ");
+    let initials = "";
+
+    if (words.length > 0) {
+        initials += words[0][0]; // First initial
+    }
+    
+    if (words.length > 1) {
+        initials += words[1][0]; // Second initial, if available
+    }
+
+    return initials.toUpperCase();
+}
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [userInitials, setUserInitials] = useState(null);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    // Fetch user data from localStorage
+    const user = JSON.parse(localStorage.getItem("username"));
+    if (user && user.name) {
+      setUserInitials(getInitials(user.name));
+    }
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -102,22 +128,17 @@ const Navbar = () => {
               About
             </div>
           </Link>
-          {/* <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/yashmandi/password-gen"
-            className="text-sm sm:text-base"
-          >
-            <div className="hover:text-white text-gray-300 cursor-pointer transition  mr-2">
-              GitHub
+          {userInitials ? (
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 text-white">
+              {userInitials}
             </div>
-          </a> */}
-          <Link to="/login">
-            <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
-              Login
-              {/* <MdLogin className="text-2xl font-extrabold"/> */}
-            </div>
-          </Link>
+          ) : (
+            <Link to="/login">
+              <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
+                Login
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     </div>

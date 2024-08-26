@@ -29,14 +29,13 @@ const Login = () => {
         setError(data.message);
       } else {
         // Handle successful login, e.g., store the token and redirect
-        toast.success("Registration successful!");
+        toast.success("Logged in!");
         console.log("Login successful!", data);
         navigate("/");
       }
     } catch (err) {
       console.error("Login failed:", err);
       toast.error("Server error. Please try again later.");
-
       setError("Server error. Please try again later.");
     }
   };
