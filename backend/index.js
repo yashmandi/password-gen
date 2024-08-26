@@ -86,7 +86,7 @@ app.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
 
     const payload = { user: { id: user.id } };
-    const token = jwt.sign(payload, "yourSecretKey", { expiresIn: "1h" });
+    const token = jwt.sign(payload, "S3CR3T", { expiresIn: "1h" });
 
     res.json({ token });
   } catch (err) {
