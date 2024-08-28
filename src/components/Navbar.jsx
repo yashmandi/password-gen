@@ -61,7 +61,7 @@ const Navbar = () => {
     <div>
       <div className="flex justify-between bg-indigo-600 h-16 p-2 pl-4 rounded-xl shadow-xl">
         <Link to="/">
-          <div className="text-2xl sm:text-3xl pl-1 font-extrabold text-white mx-auto sm:mx-0">
+          <div className="text-2xl sm:text-3xl pl-1 mt-1.5 font-extrabold text-white mx-auto sm:mx-0">
             PassGen🔐
           </div>
         </Link>
@@ -149,7 +149,7 @@ const Navbar = () => {
             (
               <div className="relative flex items-center">
                 <div
-                  className="relative flex items-center justify-center cursor-pointer mr-2.5 mb-1.5 w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-bold text-sm hover:shadow-xl shadow-md border-white"
+                  className="relative flex items-center justify-center cursor-pointer mr-2.5 mb-1.5 w-9 h-9 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 hover:bg-gradient-to-l transition-all text-white font-bold text-sm shadow-lg border-white"
                   onClick={toggleMenu}
                 >
                   {userInitials}
