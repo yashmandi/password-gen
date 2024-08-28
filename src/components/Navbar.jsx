@@ -51,7 +51,6 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    // Clear localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
@@ -60,7 +59,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="flex justify-between bg-indigo-600 p-2 pl-4 rounded-xl shadow-xl">
+      <div className="flex justify-between bg-indigo-600 h-16 p-2 pl-4 rounded-xl shadow-xl">
         <Link to="/">
           <div className="text-2xl sm:text-3xl pl-1 font-extrabold text-white mx-auto sm:mx-0">
             PassGen🔐
@@ -172,7 +171,7 @@ const Navbar = () => {
               </div>
             ) : (
               <Link to="/login">
-                <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
+                <div className="hover:text-white flex gap-1 text-gray-300 mr-2 mt-1 cursor-pointer transition">
                   Login
                 </div>
               </Link>

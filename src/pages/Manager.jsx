@@ -45,9 +45,8 @@ const Manager = () => {
 
     if (!site || !username || !password) {
       toast.error("All fields are required", {
-        position: "bottom-left",
         style: {
-          fontSize: "13px",
+          fontSize: "12px",
           backgroundColor: "rgba(46, 46, 46, 0.8)",
           color: "#fff",
           maxWidth: "400px",
@@ -68,9 +67,8 @@ const Manager = () => {
     setform({ site: "", username: "", password: "" });
 
     toast.success("Password saved!", {
-      position: "bottom-left",
       style: {
-        fontSize: "13px",
+        fontSize: "12px",
         backgroundColor: "rgba(46, 46, 46, 0.8)",
         color: "#fff",
         maxWidth: "400px",
@@ -100,9 +98,8 @@ const Manager = () => {
     setIsModalOpen(false);
     setPasswordToDelete(null);
     toast.success("Password deleted!", {
-      position: "bottom-left",
       style: {
-        fontSize: "13px",
+        fontSize: "12px",
         backgroundColor: "rgba(46, 46, 46, 0.8)",
         color: "#fff",
         maxWidth: "400px",
