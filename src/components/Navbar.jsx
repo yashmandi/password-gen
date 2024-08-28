@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Function to get initials from a full name
 export const getInitials = (name) => {
@@ -23,6 +23,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userInitials, setUserInitials] = useState(null);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user data from localStorage
@@ -48,6 +49,16 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleLogout = () => {
+    // Clear localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    // Refresh the page or navigate to login
+    navigate("/login");
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -107,6 +118,14 @@ const Navbar = () => {
               >
                 GitHub
               </a>
+              {userInitials && (
+                <div
+                  className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -129,9 +148,29 @@ const Navbar = () => {
           </Link>
           {userInitials ?
             (
-              <div className="flex items-center justify-center cursor-pointer mr-2.5 mb-1.5  w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500  text-white font-bold text-sm hover:shadow-xl shadow-md  border-white">
-                {userInitials}
-              </div>) : (
+              <div className="relative flex items-center">
+                <div
+                  className="relative flex items-center justify-center cursor-pointer mr-2.5 mb-1.5 w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-bold text-sm hover:shadow-xl shadow-md border-white"
+                  onClick={toggleMenu}
+                >
+                  {userInitials}
+                </div>
+                {/* Dropdown Menu for Logout */}
+                {isOpen && (
+                  <div
+                    ref={dropdownRef}
+                    className="absolute right-0 mt-24 w-32 bg-gray-800 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out"
+                  >
+                    <div
+                      className="py-2 px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
               <Link to="/login">
                 <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
                   Login
