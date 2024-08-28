@@ -88,8 +88,7 @@ const Navbar = () => {
           {/* Mobile Menu Dropdown */}
           <div
             ref={dropdownRef}
-            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "scale-100" : "scale-0"
-              } origin-top-right`}
+            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "scale-100" : "scale-0"} origin-top-right`}
           >
             <div className="py-2">
               <Link to="/password-manager">
@@ -108,15 +107,11 @@ const Navbar = () => {
                 </div>
               </Link>
               {userInitials ? (
-                <div>
-                  {isOpen && (
-                    <div
-                      className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </div>
-                  )}
+                <div
+                  className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  Logout
                 </div>
               ) : (
                 <Link to="/login">
@@ -127,6 +122,7 @@ const Navbar = () => {
               )}
             </div>
           </div>
+
         </div>
 
         <div className="hidden sm:flex gap-4 sm:gap-6 mt-2">
