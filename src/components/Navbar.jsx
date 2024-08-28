@@ -108,21 +108,23 @@ const Navbar = () => {
                   About
                 </div>
               </Link>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://github.com/yashmandi/password-gen"
-                className="py-1.5 mb- hover:bg-gray-700 cursor-pointer"
-              >
-                GitHub
-              </a>
-              {userInitials && (
-                <div
-                  className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer"
-                  onClick={handleLogout}
-                >
-                  Logout
+              {userInitials ? (
+                <div>
+                  {isOpen && (
+                    <div
+                      className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </div>
+                  )}
                 </div>
+              ) : (
+                <Link to="/login">
+                  <div className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer">
+                    Login
+                  </div>
+                </Link>
               )}
             </div>
           </div>
