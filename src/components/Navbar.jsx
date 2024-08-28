@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 
 // Function to get initials from a full name
 export const getInitials = (name) => {
-    if (!name) return "";
+  if (!name) return "";
 
-    const words = name.trim().split(" ");
-    let initials = "";
+  const words = name.trim().split(" ");
+  let initials = "";
 
-    if (words.length > 0) {
-        initials += words[0][0]; // First initial
-    }
-    
-    if (words.length > 1) {
-        initials += words[1][0]; // Second initial, if available
-    }
+  if (words.length > 0) {
+    initials += words[0][0]; // First initial
+  }
 
-    return initials.toUpperCase();
+  if (words.length > 1) {
+    initials += words[1][0]; // Second initial, if available
+  }
+
+  return initials.toUpperCase();
 }
 
 const Navbar = () => {
@@ -26,9 +26,9 @@ const Navbar = () => {
 
   useEffect(() => {
     // Fetch user data from localStorage
-    const user = JSON.parse(localStorage.getItem("username"));
-    if (user && user.name) {
-      setUserInitials(getInitials(user.name));
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.fullName) {
+      setUserInitials(getInitials(user.fullName));
     }
   }, []);
 
@@ -51,7 +51,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="flex justify-between bg-indigo-600 p-3 pl-4 rounded-xl shadow-xl">
+      <div className="flex justify-between bg-indigo-600 p-2 pl-4 rounded-xl shadow-xl">
         <Link to="/">
           <div className="text-2xl sm:text-3xl pl-1 font-extrabold text-white mx-auto sm:mx-0">
             PassGen🔐
@@ -80,9 +80,8 @@ const Navbar = () => {
           {/* Mobile Menu Dropdown */}
           <div
             ref={dropdownRef}
-            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${
-              isOpen ? "scale-100" : "scale-0"
-            } origin-top-right`}
+            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "scale-100" : "scale-0"
+              } origin-top-right`}
           >
             <div className="py-2">
               <Link to="/password-manager">
@@ -112,33 +111,33 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="hidden sm:flex gap-4 sm:gap-6 mt-1.5">
+        <div className="hidden sm:flex gap-4 sm:gap-6 mt-2">
           <Link to="/password-manager">
-            <div className="hover:text-white text-gray-300 cursor-pointer transition">
+            <div className="hover:text-white text-gray-300 cursor-pointer transition mt-1">
               Password Manager
             </div>
           </Link>
           <Link to="/blogs">
-            <div className="hover:text-white text-gray-300 cursor-pointer transition">
+            <div className="hover:text-white text-gray-300 cursor-pointer transition mt-1">
               Blogs
             </div>
           </Link>
           <Link to="/about">
-            <div className="hover:text-white text-gray-300 cursor-pointer transition">
+            <div className="hover:text-white text-gray-300 cursor-pointer transition mt-1">
               About
             </div>
           </Link>
-          {userInitials ? (
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 text-white">
-              {userInitials}
-            </div>
-          ) : (
-            <Link to="/login">
-              <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
-                Login
-              </div>
-            </Link>
-          )}
+          {userInitials ?
+            (
+              <div className="flex items-center justify-center cursor-pointer mr-2.5 mb-1.5  w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500  text-white font-bold text-sm hover:shadow-xl shadow-md  border-white">
+                {userInitials}
+              </div>) : (
+              <Link to="/login">
+                <div className="hover:text-white flex gap-1 text-gray-300 mr-2 cursor-pointer transition">
+                  Login
+                </div>
+              </Link>
+            )}
         </div>
       </div>
     </div>

@@ -12,13 +12,20 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    
+
+    // Save user details in localStorage
+    localStorage.setItem("user", JSON.stringify({
+      fullName,
+      email,
+      password,
+    }));
+
     try {
       const response = await fetch("http://localhost:3000/register", {
         method: "POST",
@@ -33,10 +40,10 @@ const Signup = () => {
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         // Redirect or show a success message
-        navigate("/login");
+        navigate("/");
       } else {
         setError(data.message || "Registration failed");
       }
@@ -44,6 +51,7 @@ const Signup = () => {
       setError("Server error");
     }
   };
+
 
   return (
     <div>

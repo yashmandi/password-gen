@@ -69,6 +69,7 @@ app.post("/register", async (req, res) => {
 
     res.status(201).json({ token });
   } catch (err) {
+    console.error("Error during registration:", err); // Improved error logging
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
