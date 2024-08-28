@@ -10,20 +10,41 @@ import ConfirmationModal from "../components/ConfirmationModal"; // Import the m
 const Manager = () => {
   const ref = useRef();
   const passwordRef = useRef();
-  const [form, setform] = useState({ site: "", username: "", password: "" });
+  const [form, setForm] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setPasswordArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [passwordToDelete, setPasswordToDelete] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication status
+  const [authToken, setAuthToken] = useState(""); // Authentication token
 
+  // Function to fetch passwords from backend
   const getPasswords = async () => {
-    let req = fetch("https://localhost:3000/");
-    let passwords = await req.JSON();
-    console.log(passwords);
-    setPasswordArray(passwords);
+    if (!isLoggedIn) return;
+    try {
+      const response = await fetch("/passwords", {
+        headers: {
+          "Authorization": `Bearer ${authToken}`,
+        },
+      });
+      const passwords = await response.json();
+      setPasswordArray(passwords);
+    } catch (err) {
+      console.error("Failed to fetch passwords", err);
+    }
   };
 
   useEffect(() => {
-    getPasswords();
+    // Check user authentication status and token
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setIsLoggedIn(true);
+      setAuthToken(user.token); // Assuming token is stored in user object
+      getPasswords();
+    } else {
+      setIsLoggedIn(false);
+      setAuthToken("");
+      setPasswordArray([]); // Clear passwords if not logged in
+    }
   }, []);
 
   const copyText = (text) => {
@@ -40,10 +61,25 @@ const Manager = () => {
     }
   };
 
-  const savePassword = () => {
-    const { site, username, password } = form;
+  const savePassword = async () => {
+    if (!isLoggedIn) {
+      toast.error("Login to save your passwords", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+      return;
+    }
 
-    if (!site || !username || !password) {
+    const { website, username, password } = form;
+
+    if (!website || !username || !password) {
       toast.error("All fields are required", {
         style: {
           fontSize: "12px",
@@ -58,25 +94,43 @@ const Manager = () => {
       return;
     }
 
-    const newPassword = { ...form, id: uuidv4() };
-    const updatedPasswordArray = [...passwordArray, newPassword];
-
-    setPasswordArray(updatedPasswordArray);
-    localStorage.setItem("passwords", JSON.stringify(updatedPasswordArray));
-
-    setform({ site: "", username: "", password: "" });
-
-    toast.success("Password saved!", {
-      style: {
-        fontSize: "12px",
-        backgroundColor: "rgba(46, 46, 46, 0.8)",
-        color: "#fff",
-        maxWidth: "400px",
-        boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-        borderRadius: "8px",
-        borderColor: "rgba(0, 0, 0, 0.8)",
-      },
-    });
+    try {
+      const response = await fetch("http://localhost:3000/passwords", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ website: site, username, password }),
+      });
+      const newPassword = await response.json();
+      setPasswordArray([...passwordArray, newPassword]);
+      setForm({ site: "", username: "", password: "" });
+      toast.success("Password saved!", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+    } catch (err) {
+      console.error("Failed to save password", err);
+      toast.error("Failed to save password", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+    }
   };
 
   const handleDeletePassword = (id) => {
@@ -85,40 +139,52 @@ const Manager = () => {
   };
 
   const confirmDelete = async () => {
-    setPasswordArray(
-      passwordArray.filter((item) => item.id !== passwordToDelete)
-    );
-    await fetch("https://localhost:3000/", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: passwordToDelete }),
-    });
+    try {
+      await fetch(`/passwords/${passwordToDelete}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${authToken}`,
+        },
+      });
+      setPasswordArray(
+        passwordArray.filter((item) => item.id !== passwordToDelete)
+      );
+      toast.success("Password deleted!", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+    } catch (err) {
+      console.error("Failed to delete password", err);
+      toast.error("Failed to delete password", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+    }
     setIsModalOpen(false);
     setPasswordToDelete(null);
-    toast.success("Password deleted!", {
-      style: {
-        fontSize: "12px",
-        backgroundColor: "rgba(46, 46, 46, 0.8)",
-        color: "#fff",
-        maxWidth: "400px",
-        boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-        borderRadius: "8px",
-        borderColor: "rgba(0, 0, 0, 0.8)",
-      },
-    });
-
-    setIsModalOpen(false);
   };
 
   const editPassword = (id) => {
-    setform(passwordArray.filter((i) => i.id === id)[0]);
+    setForm(passwordArray.find((i) => i.id === id));
     setPasswordArray(passwordArray.filter((item) => item.id !== id));
   };
 
   const handleChange = (e) => {
-    setform({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   return (
@@ -217,7 +283,7 @@ const Manager = () => {
                       <td className="px-4 py-2 border border-gray-800">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank" rel="noreferrer">
-                            {item.site}
+                            {item.website}
                           </a>
                           <FaRegCopy
                             className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
@@ -236,7 +302,7 @@ const Manager = () => {
                       </td>
                       <td className="px-4 py-2 border border-gray-800">
                         <div className="flex items-center justify-center">
-                          {item.password.replace(/./g, "•")}
+                          {item.password ? item.password.replace(/./g, "•") : "••••••••"}
                           <FaRegCopy
                             className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
                             onClick={() => copyText(item.password)}

@@ -100,7 +100,6 @@ app.post("/login", async (req, res) => {
 });
 
 
-
 // Save a password (protected route)
 app.post("/passwords", auth, async (req, res) => {
   const { website, username, password } = req.body;
