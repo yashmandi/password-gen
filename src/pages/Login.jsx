@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { getInitials } from "../components/Navbar";  // Import the getInitials function
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,10 +27,21 @@ const Login = () => {
 
       if (!response.ok) {
         setError(data.message);
+        toast.error(data.message || "Login failed. Please try again.");
       } else {
-        // Handle successful login, e.g., store the token and redirect
-        toast.success("Logged in!");
-        console.log("Login successful!", data);
+        // Store token and user info in localStorage
+        localStorage.setItem("token", data.token);
+
+        // Extract user initials from the full name
+        const userInitials = getInitials(data.user.fullName);
+
+        // Store user info in localStorage
+        localStorage.setItem("user", JSON.stringify({
+          fullName: data.user.fullName,
+          initials: userInitials,
+        }));
+
+        toast.success("Logged in successfully!");
         navigate("/");
       }
     } catch (err) {

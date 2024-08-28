@@ -83,17 +83,23 @@ app.post("/login", async (req, res) => {
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
     const payload = { user: { id: user.id } };
     const token = jwt.sign(payload, "S3CR3T", { expiresIn: "1h" });
 
-    res.json({ token });
+    res.json({
+      token,
+      user: {
+        fullName: user.fullName,  // Include full name in the response
+      },
+    });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
+
+
 
 // Save a password (protected route)
 app.post("/passwords", auth, async (req, res) => {
