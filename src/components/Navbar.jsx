@@ -55,8 +55,6 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    // Refresh the page or navigate to login
-    navigate("/login");
     window.location.reload();
   };
 
