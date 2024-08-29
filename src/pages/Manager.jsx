@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
 import ConfirmationModal from "../components/ConfirmationModal"; // Import the modal
+import { stringify } from 'flatted';
 
 const Manager = () => {
   const ref = useRef();
@@ -60,77 +61,31 @@ const Manager = () => {
     }
   };
 
-  const savePassword = async () => {
-    if (!isLoggedIn) {
-      toast.error("Login to save your passwords", {
-        style: {
-          fontSize: "12px",
-          backgroundColor: "rgba(46, 46, 46, 0.8)",
-          color: "#fff",
-          maxWidth: "400px",
-          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-          borderRadius: "8px",
-          borderColor: "rgba(0, 0, 0, 0.8)",
-        },
-      });
-      return;
-    }
-  
-    const { site, username, password } = form;
-  
-    if (!site || !username || !password) {
-      toast.error("All fields are required", {
-        style: {
-          fontSize: "12px",
-          backgroundColor: "rgba(46, 46, 46, 0.8)",
-          color: "#fff",
-          maxWidth: "400px",
-          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-          borderRadius: "8px",
-          borderColor: "rgba(0, 0, 0, 0.8)",
-        },
-      });
-      return;
-    }
-  
+  const savePassword = async (passwordData) => {
+    const token = localStorage.getItem('token'); // Retrieve token
+
     try {
-      const response = await fetch("http://localhost:3000/passwords", {
-        method: "POST",
+      const response = await fetch('http://localhost:3000/passwords', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${authToken}`,
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include token in request
         },
-        body: JSON.stringify({ site, username, password }),
+        body: stringify(passwordData), // Use flatted for circular references
       });
-      const newPassword = await response.json();
-      setPasswordArray([...passwordArray, newPassword]);
-      setForm({ site: "", username: "", password: "" });
-      toast.success("Password saved!", {
-        style: {
-          fontSize: "12px",
-          backgroundColor: "rgba(46, 46, 46, 0.8)",
-          color: "#fff",
-          maxWidth: "400px",
-          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-          borderRadius: "8px",
-          borderColor: "rgba(0, 0, 0, 0.8)",
-        },
-      });
-    } catch (err) {
-      console.error("Failed to save password", err);
-      toast.error("Failed to save password", {
-        style: {
-          fontSize: "12px",
-          backgroundColor: "rgba(46, 46, 46, 0.8)",
-          color: "#fff",
-          maxWidth: "400px",
-          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-          borderRadius: "8px",
-          borderColor: "rgba(0, 0, 0, 0.8)",
-        },
-      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Password saved:', result);
+    } catch (error) {
+      console.error('Error saving password:', error);
     }
   };
+
+
 
   const handleDeletePassword = (id) => {
     setIsModalOpen(true);
@@ -282,7 +237,7 @@ const Manager = () => {
                       <td className="px-4 py-2 border border-gray-800">
                         <div className="flex items-center justify-center">
                           <a href={item.site} target="_blank" rel="noreferrer">
-                            {item.website}
+                            {item.site}
                           </a>
                           <FaRegCopy
                             className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"

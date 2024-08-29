@@ -34,12 +34,16 @@ mongoose
 
 // Middleware for protecting routes
 const auth = (req, res, next) => {
-  const token = req.header("Authorization");
-  if (!token)
+  const token = req.header("Authorization")?.replace('Bearer ', '');
+  console.log('Received token:', token); // Debug log
+
+  if (!token) {
     return res.status(401).json({ message: "No token, authorization denied" });
+  }
 
   try {
-    const decoded = jwt.verify(token, "s3cr3t");
+    const decoded = jwt.verify(token, "S3cr3tK3y");
+    console.log('Decoded token:', decoded); // Debug log
     req.user = decoded.user;
     next();
   } catch (err) {
