@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FaRegCopy, FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
-import { v4 as uuidv4 } from "uuid";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
@@ -76,10 +75,10 @@ const Manager = () => {
       });
       return;
     }
-
-    const { website, username, password } = form;
-
-    if (!website || !username || !password) {
+  
+    const { site, username, password } = form;
+  
+    if (!site || !username || !password) {
       toast.error("All fields are required", {
         style: {
           fontSize: "12px",
@@ -93,7 +92,7 @@ const Manager = () => {
       });
       return;
     }
-
+  
     try {
       const response = await fetch("http://localhost:3000/passwords", {
         method: "POST",
@@ -101,7 +100,7 @@ const Manager = () => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ website: site, username, password }),
+        body: JSON.stringify({ site, username, password }),
       });
       const newPassword = await response.json();
       setPasswordArray([...passwordArray, newPassword]);

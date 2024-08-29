@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 const PasswordGeneratorBox = () => {
   const [password, setPassword] = useState("");
   const [copied, setCopied] = useState(false);
-  const [passwordLength, setPasswordLength] = useState(12); // Default password length
+  const [passwordLength, setPasswordLength] = useState(12);
 
   const generatePassword = () => {
     const characters =
@@ -81,7 +81,7 @@ const PasswordGeneratorBox = () => {
               value={password}
               readOnly
               className="p-2 rounded-lg bg-gray-700 text-white w-full sm:w-full mb-4 sm:mb-0 text-center font-mono text-lg tracking-wider shadow-inner"
-              style={{ maxWidth: '400px', width: '100%' }} // maxWidth for smaller screens only
+              style={{ maxWidth: '400px', width: '100%' }}
             />
 
             <button

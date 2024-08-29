@@ -15,7 +15,6 @@ export const getInitials = (name) => {
   if (words.length > 1) {
     initials += words[1][0]; // Second initial, if available
   }
-
   return initials.toUpperCase();
 }
 

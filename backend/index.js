@@ -111,12 +111,24 @@ app.post("/passwords", auth, async (req, res) => {
       password,
       user: req.user.id,
     });
-    await newPassword.save();
-    res.status(201).json(newPassword);
+
+    // Save the new password
+    const savedPassword = await newPassword.save();
+
+    // Respond with the saved password details
+    res.status(201).json({
+      id: savedPassword._id,
+      website: savedPassword.website,
+      username: savedPassword.username,
+      password: savedPassword.password,
+      user: savedPassword.user,
+    });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
+
+
 
 // Edit a saved password (protected route)
 app.put("/passwords/:id", auth, async (req, res) => {
@@ -147,11 +159,20 @@ app.put("/passwords/:id", auth, async (req, res) => {
 app.get("/passwords", auth, async (req, res) => {
   try {
     const passwords = await Password.find({ user: req.user.id });
-    res.json(passwords);
+
+    // Ensure all fields are included in the response
+    res.json(passwords.map(password => ({
+      id: password._id,
+      website: password.website,
+      username: password.username,
+      password: password.password,
+      user: password.user,
+    })));
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
