@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { toast } from "react-hot-toast";
-import { getInitials } from "../components/Navbar";  // Import the getInitials function
+import { getInitials } from "../components/Navbar"; // Import the getInitials function
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
@@ -22,25 +22,20 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (!response.ok) {
         setError(data.message);
         toast.error(data.message || "Login failed. Please try again.");
       } else {
         // Store token and user info in localStorage
-        localStorage.setItem("token", data.token);
-
-        // Extract user initials from the full name
-        const userInitials = getInitials(data.user.fullName);
-
-        // Store user info in localStorage
         localStorage.setItem("user", JSON.stringify({
           fullName: data.user.fullName,
-          initials: userInitials,
+          initials: getInitials(data.user.fullName),
+          token: data.token,
         }));
-
+  
         toast.success("Logged in successfully!");
         navigate("/");
       }
@@ -50,7 +45,6 @@ const Login = () => {
       setError("Server error. Please try again later.");
     }
   };
-
 
   return (
     <div>

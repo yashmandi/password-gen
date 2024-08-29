@@ -11,11 +11,15 @@ app.use(bodyParser.json());
 const User = require("./models/userModel");
 const Password = require("./models/passwordModel");
 
-app.use(
-  cors({
-    origin: "http://localhost:5173", // Allow requests from this origin
-  })
-);
+app.use(cors({
+  origin: 'http://localhost:5173', // Your frontend URL
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 app.use(cors());
 
@@ -42,11 +46,12 @@ const auth = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "S3cr3tK3y");
+    const decoded = jwt.verify(token, "S3CR3T"); // Make sure this matches the secret used in login
     console.log('Decoded token:', decoded); // Debug log
     req.user = decoded.user;
     next();
   } catch (err) {
+    console.error('Token verification failed:', err);
     res.status(401).json({ message: "Token is not valid" });
   }
 };
@@ -95,44 +100,44 @@ app.post("/login", async (req, res) => {
     res.json({
       token,
       user: {
-        fullName: user.fullName,  // Include full name in the response
+        fullName: user.fullName,
       },
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
 
-
 // Save a password (protected route)
 app.post("/passwords", auth, async (req, res) => {
   const { website, username, password } = req.body;
+
+  if (!website || !username || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
   try {
     const newPassword = new Password({
       website,
       username,
       password,
-      user: req.user.id,
+      user: req.user.id, // Associate the password with the logged-in user
     });
 
-    // Save the new password
     const savedPassword = await newPassword.save();
 
-    // Respond with the saved password details
     res.status(201).json({
       id: savedPassword._id,
       website: savedPassword.website,
       username: savedPassword.username,
       password: savedPassword.password,
-      user: savedPassword.user,
     });
   } catch (err) {
+    console.error('Error saving password:', err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
-
-
 
 // Edit a saved password (protected route)
 app.put("/passwords/:id", auth, async (req, res) => {
@@ -163,20 +168,17 @@ app.put("/passwords/:id", auth, async (req, res) => {
 app.get("/passwords", auth, async (req, res) => {
   try {
     const passwords = await Password.find({ user: req.user.id });
-
-    // Ensure all fields are included in the response
     res.json(passwords.map(password => ({
       id: password._id,
       website: password.website,
       username: password.username,
       password: password.password,
-      user: password.user,
     })));
   } catch (err) {
+    console.error('Error fetching passwords:', err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
-
 
 // Start the server
 const PORT = process.env.PORT || 3000;

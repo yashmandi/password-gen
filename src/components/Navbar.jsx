@@ -16,7 +16,7 @@ export const getInitials = (name) => {
     initials += words[1][0]; // Second initial, if available
   }
   return initials.toUpperCase();
-}
+};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,6 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user data from localStorage
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.fullName) {
       setUserInitials(getInitials(user.fullName));
@@ -50,9 +49,11 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
     localStorage.removeItem("user");
-
+    setIsLoggedIn(false);
+    setAuthToken("");
+    setPasswordArray([]);
+    // Redirect to login page or home page
     window.location.reload();
   };
 
@@ -87,7 +88,9 @@ const Navbar = () => {
           {/* Mobile Menu Dropdown */}
           <div
             ref={dropdownRef}
-            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "scale-100" : "scale-0"} origin-top-right`}
+            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${
+              isOpen ? "scale-100" : "scale-0"
+            } origin-top-right`}
           >
             <div className="py-2">
               <Link to="/password-manager">
@@ -121,7 +124,6 @@ const Navbar = () => {
               )}
             </div>
           </div>
-
         </div>
 
         <div className="hidden sm:flex gap-4 sm:gap-6 mt-2">
@@ -140,37 +142,36 @@ const Navbar = () => {
               About
             </div>
           </Link>
-          {userInitials ?
-            (
-              <div className="relative flex items-center">
-                <div
-                  className="relative flex items-center justify-center cursor-pointer mr-2.5 mb-1.5 w-9 h-9 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 hover:bg-gradient-to-l transition-all text-white font-bold text-sm shadow-lg border-white"
-                  onClick={toggleMenu}
-                >
-                  {userInitials}
-                </div>
-                {/* Dropdown Menu for Logout */}
-                {isOpen && (
-                  <div
-                    ref={dropdownRef}
-                    className="absolute right-0 mt-24 w-32 bg-gray-800 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out"
-                  >
-                    <div
-                      className="py-2 px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </div>
-                  </div>
-                )}
+          {userInitials ? (
+            <div className="relative flex items-center">
+              <div
+                className="relative flex items-center justify-center cursor-pointer mr-2.5 mb-1.5 w-9 h-9 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 hover:bg-gradient-to-l transition-all text-white font-bold text-sm shadow-lg border-white"
+                onClick={toggleMenu}
+              >
+                {userInitials}
               </div>
-            ) : (
-              <Link to="/login">
-                <div className="hover:text-white flex gap-1 text-gray-300 mr-2 mt-1 cursor-pointer transition">
-                  Login
+              {/* Dropdown Menu for Logout */}
+              {isOpen && (
+                <div
+                  ref={dropdownRef}
+                  className="absolute right-0 mt-24 w-32 bg-gray-800 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out"
+                >
+                  <div
+                    className="py-2 px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </div>
                 </div>
-              </Link>
-            )}
+              )}
+            </div>
+          ) : (
+            <Link to="/login">
+              <div className="hover:text-white flex gap-1 text-gray-300 mr-2 mt-1 cursor-pointer transition">
+                Login
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     </div>

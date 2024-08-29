@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
 import ConfirmationModal from "../components/ConfirmationModal"; // Import the modal
-import { stringify } from 'flatted';
+import { stringify } from "flatted";
 
 const Manager = () => {
   const ref = useRef();
@@ -17,36 +17,39 @@ const Manager = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication status
   const [authToken, setAuthToken] = useState(""); // Authentication token
 
+  useEffect(() => {
+    // Check user authentication status and token
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.token) {
+      setIsLoggedIn(true);
+      setAuthToken(user.token);
+      getPasswords(user.token);
+    } else {
+      setIsLoggedIn(false);
+      setAuthToken("");
+      setPasswordArray([]);
+    }
+  }, []);
+
   // Function to fetch passwords from backend
-  const getPasswords = async () => {
-    if (!isLoggedIn) return;
+  const getPasswords = async (token) => {
+    if (!token) return;
     try {
-      const response = await fetch("/passwords", {
+      const response = await fetch("http://localhost:3000/passwords", {
         headers: {
-          "Authorization": `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
       const passwords = await response.json();
       setPasswordArray(passwords);
     } catch (err) {
       console.error("Failed to fetch passwords", err);
+      toast.error("Failed to fetch passwords");
     }
   };
-
-  useEffect(() => {
-    // Check user authentication status and token
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      setIsLoggedIn(true);
-      setAuthToken(user.token); // Assuming token is stored in user object
-      getPasswords();
-    } else {
-      setIsLoggedIn(false);
-      setAuthToken("");
-      setPasswordArray([]); // Clear passwords if not logged in
-    }
-  }, []);
-
   const copyText = (text) => {
     navigator.clipboard.writeText(text);
   };
@@ -61,31 +64,50 @@ const Manager = () => {
     }
   };
 
-  const savePassword = async (passwordData) => {
-    const token = localStorage.getItem('token'); // Retrieve token
+  const savePassword = async () => {
+    if (!authToken) {
+      toast.error("Please log in to save passwords.");
+      return;
+    }
+
+    if (!form.site || !form.username || !form.password) {
+      toast.error("All fields are required.");
+      return;
+    }
+
+    const passwordData = {
+      website: form.site,
+      username: form.username,
+      password: form.password,
+    };
 
     try {
-      const response = await fetch('http://localhost:3000/passwords', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/passwords", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include token in request
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
         },
-        body: stringify(passwordData), // Use flatted for circular references
+        body: JSON.stringify(passwordData),
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || `HTTP error! Status: ${response.status}`
+        );
       }
 
       const result = await response.json();
-      console.log('Password saved:', result);
+      console.log("Password saved:", result);
+      toast.success("Password saved successfully!");
+      getPasswords(authToken);
+      setForm({ site: "", username: "", password: "" });
     } catch (error) {
-      console.error('Error saving password:', error);
+      console.error("Error saving password:", error);
+      toast.error(`Failed to save password: ${error.message}`);
     }
   };
-
-
 
   const handleDeletePassword = (id) => {
     setIsModalOpen(true);
@@ -97,7 +119,7 @@ const Manager = () => {
       await fetch(`/passwords/${passwordToDelete}`, {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${authToken}`,
+          Authorization: `Bearer ${authToken}`,
         },
       });
       setPasswordArray(
@@ -138,7 +160,10 @@ const Manager = () => {
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm((prevForm) => ({
+      ...prevForm,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -154,7 +179,9 @@ const Manager = () => {
               <br />
               <span className="text-xl sm:text-3xl">Password Manager</span>
             </h1>
-            <p className="text-md text-white">Your Personal Password Manager!</p>
+            <p className="text-md text-white">
+              Your Personal Password Manager!
+            </p>
           </div>
           <div className="max-w-md mx-auto mt-10">
             <input
@@ -211,76 +238,87 @@ const Manager = () => {
           <h2 className="text-2xl text-white font-bold text-center mb-6">
             Your Passwords
           </h2>
-          {passwordArray.length === 0 && (
-            <div className="text-center text-white">No passwords to show</div>
-          )}
-          {passwordArray.length !== 0 && (
-            <div className="overflow-x-auto">
-              <table className="table-auto w-full border-collapse border border-gray-800">
-                <thead>
-                  <tr className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
-                    <th className="px-4 py-2 border border-gray-800">Site</th>
-                    <th className="px-4 py-2 border border-gray-800">
-                      Username
-                    </th>
-                    <th className="px-4 py-2 border border-gray-800">
-                      Password
-                    </th>
-                    <th className="px-4 py-2 border border-gray-800">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {passwordArray.map((item, index) => (
-                    <tr key={index} className="bg-[#1e1d2b] text-white">
-                      <td className="px-4 py-2 border border-gray-800">
-                        <div className="flex items-center justify-center">
-                          <a href={item.site} target="_blank" rel="noreferrer">
-                            {item.site}
-                          </a>
-                          <FaRegCopy
-                            className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
-                            onClick={() => copyText(item.site)}
-                          />
-                        </div>
-                      </td>
-                      <td className="px-4 py-2 border border-gray-800">
-                        <div className="flex items-center justify-center">
-                          {item.username}
-                          <FaRegCopy
-                            className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
-                            onClick={() => copyText(item.username)}
-                          />
-                        </div>
-                      </td>
-                      <td className="px-4 py-2 border border-gray-800">
-                        <div className="flex items-center justify-center">
-                          {item.password ? item.password.replace(/./g, "•") : "••••••••"}
-                          <FaRegCopy
-                            className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
-                            onClick={() => copyText(item.password)}
-                          />
-                        </div>
-                      </td>
-                      <td className="px-4 py-2 border border-gray-800">
-                        <div className="flex items-center justify-center">
-                          <FaRegEdit
-                            className="text-xl cursor-pointer text-white hover:text-gray-300 transition"
-                            onClick={() => editPassword(item.id)}
-                          />
-                          <MdOutlineDelete
-                            className="ml-4 text-2xl cursor-pointer text-white hover:text-red-400 transition"
-                            onClick={() => handleDeletePassword(item.id)}
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          {!isLoggedIn
+            ? passwordArray.length === 0 && (
+                <div className="text-center text-white">
+                  No passwords to show
+                </div>
+              )
+            : passwordArray.length !== 0 && (
+                <div className="overflow-x-auto">
+                  <table className="table-auto w-full border-collapse border border-gray-800">
+                    <thead>
+                      <tr className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
+                        <th className="px-4 py-2 border border-gray-800">
+                          Site
+                        </th>
+                        <th className="px-4 py-2 border border-gray-800">
+                          Username
+                        </th>
+                        <th className="px-4 py-2 border border-gray-800">
+                          Password
+                        </th>
+                        <th className="px-4 py-2 border border-gray-800">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {passwordArray.map((item, index) => (
+                        <tr key={index} className="bg-[#1e1d2b] text-white">
+                          <td className="px-4 py-2 border border-gray-800">
+                            <div className="flex items-center justify-center">
+                              <a
+                                // href={item.website}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {item.website}
+                              </a>
+                              <FaRegCopy
+                                className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
+                                onClick={() => copyText(item.website)}
+                              />
+                            </div>
+                          </td>
+                          <td className="px-4 py-2 border border-gray-800">
+                            <div className="flex items-center justify-center">
+                              {item.username}
+                              <FaRegCopy
+                                className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
+                                onClick={() => copyText(item.username)}
+                              />
+                            </div>
+                          </td>
+                          <td className="px-4 py-2 border border-gray-800">
+                            <div className="flex items-center justify-center">
+                              {item.password
+                                ? item.password.replace(/./g, "•")
+                                : "••••••••"}
+                              <FaRegCopy
+                                className="ml-2 cursor-pointer text-lg hover:text-gray-400 transition"
+                                onClick={() => copyText(item.password)}
+                              />
+                            </div>
+                          </td>
+                          <td className="px-4 py-2 border border-gray-800">
+                            <div className="flex items-center justify-center">
+                              <FaRegEdit
+                                className="text-xl cursor-pointer text-white hover:text-gray-300 transition"
+                                onClick={() => editPassword(item.id)}
+                              />
+                              <MdOutlineDelete
+                                className="ml-4 text-2xl cursor-pointer text-white hover:text-red-400 transition"
+                                onClick={() => handleDeletePassword(item.id)}
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
         </div>
       </div>
 
