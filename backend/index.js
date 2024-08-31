@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const dotenv = require("dotenv");
+const path = require("path");
 
 const app = express();
 app.use(bodyParser.json());
@@ -11,25 +13,34 @@ app.use(bodyParser.json());
 const User = require("./models/userModel");
 const Password = require("./models/passwordModel");
 
-app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend URL
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+const envPath =
+  process.env.NODE_ENV === "production"
+    ? ".env.production"
+    : ".env.development";
+dotenv.config({ path: path.resolve(__dirname, envPath) });
+
+const allowedOrigins =
+  process.env.NODE_ENV === "production"
+    ? ["https://passgenio.vercel.app/"]
+    : ["http://localhost:5173"];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // access-control-allow-credentials:true
+    methods: "GET,PUT,POST,DELETE",
+    optionSuccessStatus: 200,
+  })
+);
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 app.use(cors());
 
-// MongoDB connection URI
-const MONGO_URI =
-  "mongodb+srv://yashmandi18:uIacym2hCoVHKXGw@cluster0.xu4kwlj.mongodb.net/passgen?retryWrites=true&w=majority&appName=Cluster0";
-
 // Connect to MongoDB
 mongoose
-  .connect(MONGO_URI, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

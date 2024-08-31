@@ -16,6 +16,7 @@ const Manager = () => {
   const [passwordToDelete, setPasswordToDelete] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication status
   const [authToken, setAuthToken] = useState(""); // Authentication token
+  const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Check user authentication status and token
@@ -35,7 +36,7 @@ const Manager = () => {
   const getPasswords = async (token) => {
     if (!token) return;
     try {
-      const response = await fetch("http://localhost:3000/passwords", {
+      const response = await fetch(`${baseURL}/passwords`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,7 +113,7 @@ const Manager = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/passwords", {
+      const response = await fetch(`${baseURL}/passwords`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
