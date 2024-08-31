@@ -19,22 +19,33 @@ const envPath =
     : ".env.development";
 dotenv.config({ path: path.resolve(__dirname, envPath) });
 
-const allowedOrigins =
-  process.env.NODE_ENV === "production"
-    ? ["https://passgenio.vercel.app"]
-    : ["http://localhost:5173"];
+// const allowedOrigins =
+//   process.env.NODE_ENV === "production"
+//     ? ["https://passgenio.vercel.app"]
+//     : ["http://localhost:5173"];
+
+const allowedOrigins = [
+  "https://passgenio.vercel.app",
+  "http://localhost:5173",
+];
 
 app.use(
   cors({
-    origin: allowedOrigins,
-    credentials: true, // access-control-allow-credentials:true
-    methods: "GET,PUT,POST,DELETE",
-    optionSuccessStatus: 200,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 204,
   })
 );
 
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 app.use(cors());
 
@@ -49,8 +60,8 @@ mongoose
 
 // Middleware for protecting routes
 const auth = (req, res, next) => {
-  const token = req.header("Authorization")?.replace('Bearer ', '');
-  console.log('Received token:', token); // Debug log
+  const token = req.header("Authorization")?.replace("Bearer ", "");
+  console.log("Received token:", token); // Debug log
 
   if (!token) {
     return res.status(401).json({ message: "No token, authorization denied" });
@@ -58,11 +69,11 @@ const auth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, "S3CR3T"); // Make sure this matches the secret used in login
-    console.log('Decoded token:', decoded); // Debug log
+    console.log("Decoded token:", decoded); // Debug log
     req.user = decoded.user;
     next();
   } catch (err) {
-    console.error('Token verification failed:', err);
+    console.error("Token verification failed:", err);
     res.status(401).json({ message: "Token is not valid" });
   }
 };
@@ -103,7 +114,8 @@ app.post("/login", async (req, res) => {
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
     const payload = { user: { id: user.id } };
     const token = jwt.sign(payload, "S3CR3T", { expiresIn: "1h" });
@@ -145,7 +157,7 @@ app.post("/passwords", auth, async (req, res) => {
       password: savedPassword.password,
     });
   } catch (err) {
-    console.error('Error saving password:', err);
+    console.error("Error saving password:", err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
@@ -179,14 +191,16 @@ app.put("/passwords/:id", auth, async (req, res) => {
 app.get("/passwords", auth, async (req, res) => {
   try {
     const passwords = await Password.find({ user: req.user.id });
-    res.json(passwords.map(password => ({
-      id: password._id,
-      website: password.website,
-      username: password.username,
-      password: password.password,
-    })));
+    res.json(
+      passwords.map((password) => ({
+        id: password._id,
+        website: password.website,
+        username: password.username,
+        password: password.password,
+      }))
+    );
   } catch (err) {
-    console.error('Error fetching passwords:', err);
+    console.error("Error fetching passwords:", err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });

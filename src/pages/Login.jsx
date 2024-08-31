@@ -9,61 +9,65 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const baseURL = import.meta.env.VITE_API_URL;
+
+  // Ensure baseURL doesn't end with a slash
+  const baseURL = import.meta.env.VITE_API_URL.endsWith("/")
+    ? import.meta.env.VITE_API_URL.slice(0, -1)
+    : import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    console.log("API URL:", baseURL);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
     try {
-      const response = await fetch(`${baseURL}login`, {
+      console.log("Attempting login to:", `${baseURL}/login`);
+      const response = await fetch(`${baseURL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // This is important for CORS requests
       });
 
+      console.log("Response status:", response.status);
+
       const data = await response.json();
+      console.log("Response data:", data);
 
       if (!response.ok) {
-        setError(data.message);
-        toast.error("Login failed. Please try again.", {
-          style: {
-            fontSize: "13px",
-            backgroundColor: "rgba(46, 46, 46, 0.8)",
-            color: "#fff",
-            maxWidth: "400px",
-            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-            borderRadius: "8px",
-            borderColor: "rgba(0, 0, 0, 0.8)",
-          },
-        });
-      } else {
-        // Store token and user info in localStorage
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            fullName: data.user.fullName,
-            initials: getInitials(data.user.fullName),
-            token: data.token,
-          })
-        );
-        toast.success("Logged in successfully!", {
-          style: {
-            fontSize: "12px",
-            backgroundColor: "rgba(46, 46, 46, 0.8)",
-            color: "#fff",
-            maxWidth: "400px",
-            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-            borderRadius: "8px",
-            borderColor: "rgba(0, 0, 0, 0.8)",
-          },
-        });
-        navigate("/");
+        throw new Error(data.message || "Login failed");
       }
+
+      // Store token and user info in localStorage
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          fullName: data.user.fullName,
+          initials: getInitials(data.user.fullName),
+          token: data.token,
+        })
+      );
+
+      toast.success("Logged in successfully!", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+      navigate("/");
     } catch (err) {
       console.error("Login failed:", err);
-      toast.error("Server error. Please try again later.", {
+      toast.error(err.message || "Server error. Please try again later.", {
         style: {
           fontSize: "13px",
           backgroundColor: "rgba(46, 46, 46, 0.8)",
@@ -74,10 +78,9 @@ const Login = () => {
           borderColor: "rgba(0, 0, 0, 0.8)",
         },
       });
-      setError("Server error. Please try again later.");
+      setError(err.message || "Server error. Please try again later.");
     }
   };
-
   return (
     <div>
       <div className="absolute top-8 left-8">
