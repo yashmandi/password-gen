@@ -103,13 +103,13 @@ const Navbar = () => {
                 </div>
               </Link>
               <Link to="/about">
-                <div className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer">
+                <div className="py-1.5 mb- hover:bg-gray-700 cursor-pointer">
                   About
                 </div>
               </Link>
               {userInitials ? (
                 <div
-                  className="py-1.5 mb-2 hover:bg-gray-700 cursor-pointer"
+                  className="py-1. mb-2 hover:bg-gray-700 cursor-pointer"
                   onClick={handleLogout}
                 >
                   Logout
