@@ -24,7 +24,7 @@ const Login = () => {
     setError(null);
 
     try {
-      const loginURL = `${baseURL}/login`;
+      const loginURL = `${baseURL}/login`.replace(/\/\//g, "/");
       console.log("Attempting login to:", loginURL);
 
       const response = await fetch(loginURL, {

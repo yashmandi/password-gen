@@ -41,7 +41,7 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    optionsSuccessStatus: 204,
+    optionsSuccessStatus: 204, // Ensure 204 status for OPTIONS
   })
 );
 
