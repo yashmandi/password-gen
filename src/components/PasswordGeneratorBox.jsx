@@ -23,9 +23,8 @@ const PasswordGeneratorBox = () => {
       .then(() => {
         setCopied(true);
         toast.success("Copied to Clipboard!", {
-          position: "bottom-left",
           style: {
-            fontSize: "13px",
+            fontSize: "12px",
             backgroundColor: "rgba(46, 46, 46, 0.8)",
             color: "#fff",
             maxWidth: "400px",
@@ -37,7 +36,6 @@ const PasswordGeneratorBox = () => {
       })
       .catch(() => {
         toast.error("Error Copying to Clipboard. Try again.", {
-          position: "bottom-left",
           style: {
             fontSize: "13px",
             backgroundColor: "rgba(46, 46, 46, 0.8)",

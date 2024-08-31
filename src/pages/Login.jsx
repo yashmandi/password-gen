@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
@@ -22,26 +22,58 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
-  
+
       if (!response.ok) {
         setError(data.message);
-        toast.error(data.message || "Login failed. Please try again.");
+        toast.error("Login failed. Please try again.", {
+          style: {
+            fontSize: "13px",
+            backgroundColor: "rgba(46, 46, 46, 0.8)",
+            color: "#fff",
+            maxWidth: "400px",
+            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+            borderRadius: "8px",
+            borderColor: "rgba(0, 0, 0, 0.8)",
+          },
+        });
       } else {
         // Store token and user info in localStorage
-        localStorage.setItem("user", JSON.stringify({
-          fullName: data.user.fullName,
-          initials: getInitials(data.user.fullName),
-          token: data.token,
-        }));
-  
-        toast.success("Logged in successfully!");
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            fullName: data.user.fullName,
+            initials: getInitials(data.user.fullName),
+            token: data.token,
+          })
+        );
+        toast.success("Logged in successfully!", {
+          style: {
+            fontSize: "12px",
+            backgroundColor: "rgba(46, 46, 46, 0.8)",
+            color: "#fff",
+            maxWidth: "400px",
+            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+            borderRadius: "8px",
+            borderColor: "rgba(0, 0, 0, 0.8)",
+          },
+        });
         navigate("/");
       }
     } catch (err) {
       console.error("Login failed:", err);
-      toast.error("Server error. Please try again later.");
+      toast.error("Server error. Please try again later.", {
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
       setError("Server error. Please try again later.");
     }
   };

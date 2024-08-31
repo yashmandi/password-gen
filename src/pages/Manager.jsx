@@ -47,7 +47,17 @@ const Manager = () => {
       setPasswordArray(passwords);
     } catch (err) {
       console.error("Failed to fetch passwords", err);
-      toast.error("Failed to fetch passwords");
+      toast.error("Failed to fetch passwords.", {
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
     }
   };
   const copyText = (text) => {
@@ -66,12 +76,32 @@ const Manager = () => {
 
   const savePassword = async () => {
     if (!authToken) {
-      toast.error("Please log in to save passwords.");
+      toast.error("Login to save passwords.", {
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
       return;
     }
 
     if (!form.site || !form.username || !form.password) {
-      toast.error("All fields are required.");
+      toast.error("All fields are required.", {
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
       return;
     }
 
@@ -100,12 +130,34 @@ const Manager = () => {
 
       const result = await response.json();
       console.log("Password saved:", result);
-      toast.success("Password saved successfully!");
+      toast.success("Password saved!", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
       getPasswords(authToken);
       setForm({ site: "", username: "", password: "" });
     } catch (error) {
       console.error("Error saving password:", error);
-      toast.error(`Failed to save password: ${error.message}`);
+      // toast.error(`Failed to save password: ${error.message}`);
+      
+      toast.error("Failed to save password. Please try again.", {
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
     }
   };
 
