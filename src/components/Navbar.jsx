@@ -21,6 +21,9 @@ export const getInitials = (name) => {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userInitials, setUserInitials] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authToken, setAuthToken] = useState("");
+  const [passwordArray, setPasswordArray] = useState([]);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
