@@ -50,10 +50,9 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    setIsLoggedIn(false);
+    setIsLoggedIn(false); 
     setAuthToken("");
     setPasswordArray([]);
-    // Redirect to login page or home page
     window.location.reload();
   };
 
