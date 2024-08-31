@@ -21,7 +21,7 @@ dotenv.config({ path: path.resolve(__dirname, envPath) });
 
 const allowedOrigins =
   process.env.NODE_ENV === "production"
-    ? ["https://passgenio.vercel.app/"]
+    ? ["https://passgenio.vercel.app"]
     : ["http://localhost:5173"];
 
 app.use(
