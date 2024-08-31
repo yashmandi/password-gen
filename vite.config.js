@@ -9,4 +9,4 @@ export default defineConfig(({ command, mode }) => {
       'process.env': env
     }
   }
-}
+})
