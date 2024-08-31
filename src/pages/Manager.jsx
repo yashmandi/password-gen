@@ -146,7 +146,7 @@ const Manager = () => {
     } catch (error) {
       console.error("Error saving password:", error);
       // toast.error(`Failed to save password: ${error.message}`);
-      
+
       toast.error("Failed to save password. Please try again.", {
         style: {
           fontSize: "13px",
@@ -290,10 +290,18 @@ const Manager = () => {
           <h2 className="text-2xl text-white font-bold text-center mb-6">
             Your Passwords
           </h2>
+          {!isLoggedIn ? (
+            <div className="text-center text-white">
+              Login to save passwords
+            </div>
+          ) : (
+            passwordArray.length === 0 && (
+              <div className="text-center text-white">No passwords to show</div>
+            )
+          )}
           {!isLoggedIn
             ? passwordArray.length === 0 && (
                 <div className="text-center text-white">
-                  No passwords to show
                 </div>
               )
             : passwordArray.length !== 0 && (

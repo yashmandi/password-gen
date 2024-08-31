@@ -109,7 +109,7 @@ const Navbar = () => {
               </Link>
               {userInitials ? (
                 <div
-                  className="py-1. mb-2 hover:bg-gray-700 cursor-pointer"
+                  className="py-1. mb- mt-1 hover:bg-gray-700 cursor-pointer"
                   onClick={handleLogout}
                 >
                   Logout
