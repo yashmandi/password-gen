@@ -24,14 +24,16 @@ const Login = () => {
     setError(null);
 
     try {
-      console.log("Attempting login to:", `${baseURL}/login`);
-      const response = await fetch(`${baseURL}/login`, {
+      const loginURL = `${baseURL}/login`;
+      console.log("Attempting login to:", loginURL);
+
+      const response = await fetch(loginURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include", // This is important for CORS requests
+        credentials: "include",
       });
 
       console.log("Response status:", response.status);

@@ -39,7 +39,8 @@ app.use(
       }
     },
     credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 204,
   })
 );
@@ -106,6 +107,7 @@ app.post("/register", async (req, res) => {
 });
 
 // Login an existing user
+app.options("/login", cors());
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
