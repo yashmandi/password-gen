@@ -21,7 +21,7 @@ const ManagerSection = () => {
               </h2>
 
               <p className="mt-4 text-gray-300">
-                Easily store and manage all your passwords in one place. Protect
+                Easily store and manage all your passwords in one place with our <br /><span className="font-bold text-lg text-indigo-400">PassGen Password Manager</span>. Protect
                 your data with encrypted storage and a user-friendly interface.
                 Access your saved credentials securely from any device.
               </p>
