@@ -67,6 +67,10 @@ const auth = (req, res, next) => {
   }
 };
 
+app.post("/", auth, (req, res) => {
+  res.send("Hello, World!");
+})
+
 // Register a new user
 app.post("/register", async (req, res) => {
   const { fullName, email, password, phone } = req.body;
