@@ -97,7 +97,7 @@ app.post("/register", async (req, res) => {
     await user.save();
 
     const payload = { user: { id: user.id } };
-    const token = jwt.sign(payload, "yourSecretKey", { expiresIn: "1h" });
+    const token = jwt.sign(payload, "s3cRET", { expiresIn: "1h" });
 
     res.status(201).json({ token });
   } catch (err) {
