@@ -45,8 +45,17 @@ const Signup = () => {
           },
         }
       );
-
-      // If the request was successful, redirect to the home page
+      toast.success("Registered successfully!", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
       navigate("/");
     } catch (err) {
       setError("Server error");
