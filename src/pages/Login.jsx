@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import axios from 'axios';
 import { toast } from "react-hot-toast";
 import { getInitials } from "../components/Navbar"; // Import the getInitials function
 
@@ -15,52 +16,44 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "http://localhost:3000/login",
+        {
+          email,
+          password,
         },
-        body: JSON.stringify({ email, password }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = response.data;
+
+      // Store token and user info in localStorage
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          fullName: data.user.fullName,
+          initials: getInitials(data.user.fullName),
+          token: data.token,
+        })
+      );
+
+      toast.success("Logged in successfully!", {
+        style: {
+          fontSize: "12px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.message);
-        toast.error("Login failed. Please try again.", {
-          style: {
-            fontSize: "13px",
-            backgroundColor: "rgba(46, 46, 46, 0.8)",
-            color: "#fff",
-            maxWidth: "400px",
-            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-            borderRadius: "8px",
-            borderColor: "rgba(0, 0, 0, 0.8)",
-          },
-        });
-      } else {
-        // Store token and user info in localStorage
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            fullName: data.user.fullName,
-            initials: getInitials(data.user.fullName),
-            token: data.token,
-          })
-        );
-        toast.success("Logged in successfully!", {
-          style: {
-            fontSize: "12px",
-            backgroundColor: "rgba(46, 46, 46, 0.8)",
-            color: "#fff",
-            maxWidth: "400px",
-            boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-            borderRadius: "8px",
-            borderColor: "rgba(0, 0, 0, 0.8)",
-          },
-        });
-        navigate("/");
-      }
+      navigate("/");
     } catch (err) {
       console.error("Login failed:", err);
       toast.error("Server error. Please try again later.", {
