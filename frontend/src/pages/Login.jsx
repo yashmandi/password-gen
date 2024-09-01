@@ -57,7 +57,7 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       console.error("Login failed:", err);
-      toast.error("Server error. Please try again later.", {
+      toast.error("Enter valid email and password.", {
         style: {
           fontSize: "13px",
           backgroundColor: "rgba(46, 46, 46, 0.8)",
@@ -68,7 +68,7 @@ const Login = () => {
           borderColor: "rgba(0, 0, 0, 0.8)",
         },
       });
-      setError("Server error. Please try again later.");
+      // setError("Server error. Please try again later.");
     }
   };
 
