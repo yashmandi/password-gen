@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import axios from "axios";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
@@ -21,38 +22,36 @@ const Signup = () => {
     }
 
     // Save user details in localStorage
-    localStorage.setItem("user", JSON.stringify({
-      fullName,
-      email,
-      password,
-    }));
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        fullName,
+        email,
+        password,
+      })
+    );
 
     try {
-      const response = await fetch(`${baseURL}/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        `${baseURL}/register`,
+        {
           fullName,
           email,
           password,
-        }),
-      });
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Redirect or show a success message
-        navigate("/");
-      } else {
-        setError(data.message || "Registration failed");
-      }
+      // If the request was successful, redirect to the home page
+      navigate("/");
     } catch (err) {
       setError("Server error");
     }
   };
-
 
   return (
     <div>
@@ -146,8 +145,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-start">
-                  </div>
+                  <div className="flex items-start"></div>
                 </div>
                 <button
                   type="submit"
