@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { FaRegCopy, FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
 import ConfirmationModal from "../components/ConfirmationModal"; // Import the modal
-import { stringify } from "flatted";
 
 const Manager = () => {
   const ref = useRef();
@@ -16,7 +16,7 @@ const Manager = () => {
   const [passwordToDelete, setPasswordToDelete] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication status
   const [authToken, setAuthToken] = useState(""); // Authentication token
-  const baseURL = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   useEffect(() => {
     // Check user authentication status and token
@@ -36,15 +36,12 @@ const Manager = () => {
   const getPasswords = async (token) => {
     if (!token) return;
     try {
-      const response = await fetch(`${baseURL}/passwords`, {
+      const response = await axios.get(`${apiUrl}/passwords`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const passwords = await response.json();
+      const passwords = response.data;
       setPasswordArray(passwords);
     } catch (err) {
       console.error("Failed to fetch passwords", err);
@@ -113,24 +110,14 @@ const Manager = () => {
     };
 
     try {
-      const response = await fetch(`${baseURL}/passwords`, {
-        method: "POST",
+      const response = await axios.post(`${apiUrl}/passwords`, passwordData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify(passwordData),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || `HTTP error! Status: ${response.status}`
-        );
-      }
-
-      const result = await response.json();
-      console.log("Password saved:", result);
+      console.log("Password saved:", response.data);
       toast.success("Password saved!", {
         style: {
           fontSize: "12px",
@@ -302,8 +289,7 @@ const Manager = () => {
           )}
           {!isLoggedIn
             ? passwordArray.length === 0 && (
-                <div className="text-center text-white">
-                </div>
+                <div className="text-center text-white"></div>
               )
             : passwordArray.length !== 0 && (
                 <div className="overflow-x-auto">

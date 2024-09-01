@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import axios from 'axios';
+import axios from "axios";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-hot-toast";
 import { getInitials } from "../components/Navbar"; // Import the getInitials function
