@@ -5,12 +5,12 @@ import Navbar from "../components/Navbar";
 const Pricing = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />    
+      <Navbar />
       <main className="flex-grow flex items-center justify-center ]">
         <div className="max-w-screen-xl px-4 py-8 pl-1 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
             {/* Starter Plan */}
-            <div className="divide-y divide-gray-200 rounded-2xl shadow-lg transition-all bg-[#151515] transition-transform transform hover:scale-105">
+            <div className="divide-y divide-gray-200 rounded-2xl shadow-lg transition-all bg-[#1d1d1d] transition-transform transform hover:scale-105">
               <div className="p-4 sm:p-6">
                 <h2 className="text-lg sm:text-xl font-bold text-white">
                   Starter
@@ -26,7 +26,7 @@ const Pricing = () => {
                   <span className="text-sm font-medium text-white">/month</span>
                 </p>
                 <a
-                  className="mt-4 block rounded-md transition-all bg-[#202020] px-6 py-2 text-center text-sm font-medium text-white hover:bg-[#0d0d0d] hover:text-[#ffffff] sm:mt-4"
+                  className="block rounded-lg btn btn-primary transition-all bg-indigo-500 px- py-3 text-center text-sm font-medium text-white hover:bg-indigo-600 hover:text-[#ffffff] sm:mt-4"
                   href="#"
                 >
                   Get Started
@@ -146,7 +146,7 @@ const Pricing = () => {
             </div>
 
             {/* Pro Plan */}
-            <div className="divide-y divide-gray-200 rounded-2xl transition-all bg-[#151515] transition-transform transform hover:scale-105">
+            <div className="divide-y divide-gray-200 rounded-2xl transition-all bg-[#1d1d1d] transition-transform transform hover:scale-105">
               <div className="p-4 sm:p-6">
                 <h2 className="text-lg sm:text-xl font-bold text-white">
                   Pro
@@ -164,7 +164,7 @@ const Pricing = () => {
                   </span>
                 </p>
                 <a
-                  className="mt-4 block rounded-md transition-all bg-[#202020] px-6 py-2 text-center text-sm font-medium text-white hover:bg-[#0d0d0d] hover:text-[#ffffff] sm:mt-4"
+                  className="block rounded-lg btn btn-primary transition-all bg-indigo-500 px- py-3 text-center text-sm font-medium text-white hover:bg-indigo-600 hover:text-[#ffffff] sm:mt-4"
                   href="#"
                 >
                   Get Started
