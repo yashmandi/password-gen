@@ -134,6 +134,11 @@ const Navbar = () => {
               Password Manager
             </div>
           </Link>
+          <Link to="/pricing">
+            <div className="hover:text-white text-gray-300 cursor-pointer transition mt-1">
+              Pricing
+            </div>
+          </Link>
           <Link to="/blogs">
             <div className="hover:text-white text-gray-300 cursor-pointer transition mt-1">
               Blogs
