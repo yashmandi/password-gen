@@ -6,7 +6,6 @@ import axios from "axios";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
 import ConfirmationModal from "../components/ConfirmationModal"; // Import the modal
-import PremiumModal from "../components/PremiumModal";
 
 const Manager = () => {
   const ref = useRef();
@@ -14,7 +13,6 @@ const Manager = () => {
   const [form, setForm] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setPasswordArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
   const [passwordToDelete, setPasswordToDelete] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication status
   const [authToken, setAuthToken] = useState(""); // Authentication token
@@ -115,7 +113,7 @@ const Manager = () => {
 
     // Check if the user has already saved 2 passwords
     if (passwordArray.length >= 2) {
-      toast.error("To save more passwords, buy premium version of PassGen.", {
+      toast.error("You can only save 2 passwords in free plan.", {
         style: {
           fontSize: "13px",
           backgroundColor: "rgba(46, 46, 46, 0.8)",
