@@ -90,7 +90,7 @@ const Navbar = () => {
           {/* Mobile Menu Dropdown */}
           <div
             ref={dropdownRef}
-            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[160px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${
+            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[193px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${
               isOpen ? "scale-100" : "scale-0"
             } origin-top-right`}
           >
@@ -98,6 +98,11 @@ const Navbar = () => {
               <Link to="/password-manager">
                 <div className="py-1.5 hover:bg-gray-700 cursor-pointer">
                   Password Manager
+                </div>
+              </Link>
+              <Link to="/pricing">
+                <div className="py-1.5 hover:bg-gray-700 cursor-pointer">
+                  Pricing
                 </div>
               </Link>
               <Link to="/blogs">
