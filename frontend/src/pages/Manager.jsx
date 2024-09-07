@@ -6,6 +6,7 @@ import axios from "axios";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
 import ConfirmationModal from "../components/ConfirmationModal"; // Import the modal
+import PremiumModal from "../components/PremiumModal";
 
 const Manager = () => {
   const ref = useRef();
@@ -13,6 +14,7 @@ const Manager = () => {
   const [form, setForm] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setPasswordArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
   const [passwordToDelete, setPasswordToDelete] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication status
   const [authToken, setAuthToken] = useState(""); // Authentication token
@@ -31,6 +33,14 @@ const Manager = () => {
       setPasswordArray([]);
     }
   }, []);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSeePricing = () => {
+    // Redirect to pricing page or perform any other action
+  };
 
   // Function to fetch passwords from backend
   const getPasswords = async (token) => {
@@ -103,6 +113,22 @@ const Manager = () => {
       return;
     }
 
+    // Check if the user has already saved 2 passwords
+    if (passwordArray.length >= 2) {
+      toast.error("To save more passwords, buy premium version of PassGen.", {
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+      return;
+    }
+
     const passwordData = {
       website: form.site,
       username: form.username,
@@ -133,8 +159,6 @@ const Manager = () => {
       setForm({ site: "", username: "", password: "" });
     } catch (error) {
       console.error("Error saving password:", error);
-      // toast.error(`Failed to save password: ${error.message}`);
-
       toast.error("Failed to save password. Please try again.", {
         style: {
           fontSize: "13px",
@@ -372,7 +396,7 @@ const Manager = () => {
       <div className="mt-40 border-t border-gray-700">
         <Footer />
       </div>
-
+      
       {/* Add the ConfirmationModal component here */}
       <ConfirmationModal
         show={isModalOpen}
