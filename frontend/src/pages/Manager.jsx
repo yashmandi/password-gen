@@ -158,7 +158,7 @@ const Manager = () => {
     } catch (error) {
       console.error("Error saving password:", error);
       toast.error("Failed to save password. Please try again.", {
-        style: {
+        style: { 
           fontSize: "13px",
           backgroundColor: "rgba(46, 46, 46, 0.8)",
           color: "#fff",
