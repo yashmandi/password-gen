@@ -32,6 +32,14 @@ const Manager = () => {
     }
   }, []);
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSeePricing = () => {
+    // Redirect to pricing page or perform any other action
+  };
+
   // Function to fetch passwords from backend
   const getPasswords = async (token) => {
     if (!token) return;
@@ -103,6 +111,22 @@ const Manager = () => {
       return;
     }
 
+    // Check if the user has already saved 2 passwords
+    if (passwordArray.length >= 2) {
+      toast.error("You can only save 2 passwords in free plan.", {
+        style: {
+          fontSize: "13px",
+          backgroundColor: "rgba(46, 46, 46, 0.8)",
+          color: "#fff",
+          maxWidth: "400px",
+          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
+          borderRadius: "8px",
+          borderColor: "rgba(0, 0, 0, 0.8)",
+        },
+      });
+      return;
+    }
+
     const passwordData = {
       website: form.site,
       username: form.username,
@@ -133,10 +157,8 @@ const Manager = () => {
       setForm({ site: "", username: "", password: "" });
     } catch (error) {
       console.error("Error saving password:", error);
-      // toast.error(`Failed to save password: ${error.message}`);
-
       toast.error("Failed to save password. Please try again.", {
-        style: {
+        style: { 
           fontSize: "13px",
           backgroundColor: "rgba(46, 46, 46, 0.8)",
           color: "#fff",
@@ -372,7 +394,7 @@ const Manager = () => {
       <div className="mt-40 border-t border-gray-700">
         <Footer />
       </div>
-
+      
       {/* Add the ConfirmationModal component here */}
       <ConfirmationModal
         show={isModalOpen}

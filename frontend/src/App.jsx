@@ -7,6 +7,7 @@ import Manager from "./pages/Manager";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Pricing from "./pages/Pricing";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/password-manager" element={<Manager />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/pricing" element={<Pricing />} />
       </Routes>
     </div>
   );
