@@ -10,7 +10,7 @@ const Section = () => {
               Built for security-conscious individuals like you.
             </h2>
             <p className="text-gray-500 sm:text-lg dark:text-gray-400">
-              At PassGen, we prioritize robust encryption and user-friendly design to generate strong, reliable passwords that keep your accounts safe and your mind at ease.
+              At PassPrompt, we prioritize robust encryption and user-friendly design to generate strong, reliable passwords that keep your accounts safe and your mind at ease.
             </p>
           </div>
           <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">

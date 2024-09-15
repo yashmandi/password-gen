@@ -18,7 +18,7 @@ const Home = () => {
           <br />
           password with{" "}
           <span className="text-[#766cf6] hover:text-indigo-400 font-extrabold transition cursor-default">
-            PassGen
+            PassPrompt
           </span>
           🔐
         </p>

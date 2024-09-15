@@ -18,19 +18,19 @@ const Faq = () => {
         },
         {
             question: "Can I use the password generator to create a user name?",
-            answer: "No, PassGen is designed specifically for generating passwords. For usernames, consider using a separate tool or manual creation."
+            answer: "No, PassPrompt is designed specifically for generating passwords. For usernames, consider using a separate tool or manual creation."
         },
         {
             question: "How do you manage your passwords with a password manager?",
             answer: "A password manager securely stores and organizes your passwords, allowing you to access them easily and use complex, unique passwords for each account."
         },
         {
-            question: "Is PassGen password generator safe?",
-            answer: "Yes, PassGen employs strong randomization techniques to ensure that passwords are secure and not predictable."
+            question: "Is PassPrompt password generator safe?",
+            answer: "Yes, PassPrompt employs strong randomization techniques to ensure that passwords are secure and not predictable."
         },
         {
-            question: "Is the functionality different in the online generator and in the PassGen app?",
-            answer: "Both the online generator and the PassGen app offer the same core functionality. The app may provide additional features like saving preferences or integration options."
+            question: "Is the functionality different in the online generator and in the PassPrompt app?",
+            answer: "Both the online generator and the PassPrompt app offer the same core functionality. The app may provide additional features like saving preferences or integration options."
         }
     ];
 

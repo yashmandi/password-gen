@@ -6,16 +6,16 @@ const Footer = () => {
       <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-md text-center">
           <strong className="text-2xl sm:text-4xl  font-bold text-white">
-            Create strong passwords instantly with <span className="font-extrabold text-[#766cf6]">PassGen</span>.
+            Create strong passwords instantly with <span className="font-extrabold text-[#766cf6]">PassPrompt</span>.
           </strong>
         </div>
 
         <div className="mt-16 flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-32">
           <div className="mx-auto max-w-sm lg:max-w-none text-center lg:text-left">
             <p className="mt-4 text-white text-lg lg:text-lg">
-              <span className="font-bold">PassGen🔐</span>: Secure your accounts
+              <span className="font-bold">PassPrompt🔐</span>: Secure your accounts
               effortlessly with strong, randomly generated passwords from
-              PassGen.
+              PassPrompt.
             </p>
           </div>
 

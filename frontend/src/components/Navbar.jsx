@@ -64,7 +64,7 @@ const Navbar = () => {
       <div className="flex justify-between bg-indigo-600 h-16 p-2 pl-4 rounded-xl shadow-xl">
         <Link to="/">
           <div className="text-2xl sm:text-3xl pl-1 mt-1.5 font-extrabold text-white mx-auto sm:mx-0">
-            PassGen🔐
+            PassPrompt🔐
           </div>
         </Link>
         <div className="flex items-center sm:hidden relative">

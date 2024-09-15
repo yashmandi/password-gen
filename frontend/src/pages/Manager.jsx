@@ -236,7 +236,7 @@ const Manager = () => {
           <div className="text-center">
             <h1 className="font-bold text-white mb-2">
               <span className="text-indigo-500 text-3xl sm:text-4xl">
-                PassGen🔐
+                PassPrompt🔐
               </span>{" "}
               <br />
               <span className="text-xl sm:text-3xl">Password Manager</span>
