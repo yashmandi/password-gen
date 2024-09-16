@@ -19,8 +19,8 @@ dotenv.config({ path: path.resolve(__dirname, envPath) });
 
 // CORS configuration
 const allowedOrigins = [
-  "https://passgenio.vercel.app",
-  "https://passgenio.vercel.app/login",
+  "https://passprompt.vercel.app/",
+  "https://passprompt.vercel.app/login",
   "http://localhost:5173",
   "http://localhost:3000"
 ];
