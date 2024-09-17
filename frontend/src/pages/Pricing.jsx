@@ -17,7 +17,7 @@ const Pricing = () => {
                   <span className="sr-only">Plan</span>
                 </h2>
                 <p className="mt-2 text-sm text-white">
-                  Kickstart your projects with essential features
+                  Generate passwords with essential features
                 </p>
                 <p className="mt-2 sm:mt-4">
                   <strong className="text-2xl sm:text-3xl font-bold text-white">
@@ -52,9 +52,7 @@ const Pricing = () => {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-white">
-                      Access to Basic Templates
-                    </span>
+                    <span className="text-white">Monthly Billing</span>
                   </li>
                   <li className="flex items-center gap-1">
                     <svg
@@ -71,7 +69,7 @@ const Pricing = () => {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-white">Standard Support</span>
+                    <span className="text-white">Save upto 25 Passwords</span>
                   </li>
                   <li className="flex items-center gap-1">
                     <svg
@@ -88,7 +86,7 @@ const Pricing = () => {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-white">Email support</span>
+                    <span className="text-white">Basic Security </span>
                   </li>
                   <li className="flex items-center gap-1">
                     <svg
@@ -122,24 +120,7 @@ const Pricing = () => {
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
-                    <span className="text-white">Help Center Access</span>
-                  </li>
-                  <li className="flex items-center gap-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-5 text-red-700"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                    <span className="text-white">Community access</span>
+                    <span className="text-white">Priority Support</span>
                   </li>
                 </ul>
               </div>
@@ -190,8 +171,25 @@ const Pricing = () => {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
+                    <span className="text-white">Lifetime Access</span>
+                  </li>
+                  <li className="flex items-center gap-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-5 text-green-500"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
                     <span className="text-white">
-                      Basic + Advanced Templates
+                      Save up to 100 Passwords{" "}
                     </span>
                   </li>
                   <li className="flex items-center gap-1">
@@ -209,7 +207,7 @@ const Pricing = () => {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-white">5GB of storage</span>
+                    <span className="text-white">Advanced Security</span>
                   </li>
                   <li className="flex items-center gap-1">
                     <svg
@@ -226,7 +224,7 @@ const Pricing = () => {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-white">Email support</span>
+                    <span className="text-white">Email Support</span>
                   </li>
                   <li className="flex items-center gap-1">
                     <svg
@@ -243,41 +241,7 @@ const Pricing = () => {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-white">Priority support</span>
-                  </li>
-                  <li className="flex items-center gap-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-5 text-green-500"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    <span className="text-white">Help Center Access</span>
-                  </li>
-                  <li className="flex items-center gap-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-5 text-green-500"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    <span className="text-white">Exclusive offers</span>
+                    <span className="text-white">Priority Support</span>
                   </li>
                 </ul>
               </div>
