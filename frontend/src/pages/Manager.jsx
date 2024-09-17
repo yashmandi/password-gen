@@ -250,7 +250,7 @@ const Manager = () => {
               value={form.site}
               onChange={handleChange}
               className="block w-full rounded-lg border bg-[#171c21] text-white p-3 mb-4"
-              placeholder="Enter Website URL"
+              placeholder="Enter Website"
               type="text"
               name="site"
               id="site"
