@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";  
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
