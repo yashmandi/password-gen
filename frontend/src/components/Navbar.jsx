@@ -166,7 +166,7 @@ const Navbar = () => {
               {isOpen && (
                 <div
                   ref={dropdownRef}
-                  className="absolute right-0 mt-24 w-32 bg-gray-800 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out"
+                  className="absolute right-0 mt-[105px] w-32 bg-gray-800 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out"
                 >
                   <div
                     className="py-2 px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"

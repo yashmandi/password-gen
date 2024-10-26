@@ -20,7 +20,7 @@ const About = () => {
 
         {/* Features Section */}
         <section id="features" className="mb-8">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Features</h2>
+          <h2 className="text-xl sm:text-xl font-semibold mb-4">Features</h2>
           <ul className="list-disc pl-5">
             <li className="mb-2">Generate strong, random passwords with various length and complexity.</li>
             <li className="mb-2">Customize your password with specific criteria to meet your security needs.</li>
@@ -30,7 +30,7 @@ const About = () => {
 
         {/* Privacy Section */}
         <section id="privacy" className="mb-8">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Privacy Policy</h2>
+          <h2 className="text-xl sm:text-xl font-semibold mb-4">Privacy Policy</h2>
           <p className="text-base sm:text-md mb-4">
             At PassPrompt, your privacy is important to us. We do not collect or store any personal data or passwords. All passwords are generated securely and are not saved or tracked.
           </p>
@@ -41,7 +41,7 @@ const About = () => {
 
         {/* Contact Section */}
         <section id="contact" className="mb-8">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Contact Us</h2>
+          <h2 className="text-xl sm:text-xl font-semibold mb-4">Contact Us</h2>
           <p className="text-base sm:text-md">
             If you have any questions or need assistance, feel free to reach out to us. Our support team is here to help you with any issues or inquiries you may have.
           </p>
