@@ -12,53 +12,49 @@ const Footer = () => {
 
         <div className="mt-16 flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-32">
           <div className="mx-auto max-w-sm lg:max-w-none text-center lg:text-left">
-            <p className="mt-4 text-white text-lg lg:text-lg">
+            <p className="mt-4 text-white text-lg lg:text-md">
               <span className="font-bold">PassPrompt🔐</span>: Secure your accounts
               effortlessly with strong, randomly generated passwords from
               PassPrompt.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left">
+          <div className="grid grid-cols-1 text-center lg:grid-cols-2 lg:text-left">
             <div>
               <strong className="font-medium text-white text-md">Services</strong>
-              <ul className="mt-4 text-sm space-y-1">
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">Marketing</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">Graphic Design</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">App Development</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">Web Development</a></li>
+              <ul className="mt-2 text-sm space-y-1">
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="/blogs">Blogs</a></li>
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="/password-manager">Password Manager</a></li>
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="/pricing">Pricing</a></li>
               </ul>
             </div>
 
             <div>
-              <strong className="font-medium text-white">About</strong>
-              <ul className="mt-4 text-sm space-y-1">
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">About</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">Careers</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">History</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">Our Team</a></li>
+              <strong className="font-medium text-white">Contact</strong>
+              <ul className="mt-2 text-sm space-y-1">
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="mailto:yashmandi18@gmail.com">Email</a></li>
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="https://x.com/yashmandi">Twitter</a></li>
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="https://github.com/yashmandi">GitHub</a></li>
               </ul>
             </div>
 
-            <div>
+            {/* <div>
               <strong className="font-medium text-white">Support</strong>
               <ul className="mt-4 text-sm space-y-1">
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">FAQs</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">Contact</a></li>
-                <li><a className="text-gray-300 hover:text-white font-medium transition-all" href="#">Live Chat</a></li>
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="#">FAQs</a></li>
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="#">Contact</a></li>
+                <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="#">Live Chat</a></li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
-
-        <div className="mt-4"></div>
       </div>
-      <p className="text-center text-sm text-white">
+      {/* <p className="text-center text-sm text-white">
         Developed by{" "}
         <a className="text-blue-200 hover:underline font-semibold" href="https://github.com/yashmandi">
           @yashmandi
         </a>
-      </p>
+      </p> */}
     </div>
   );
 };
