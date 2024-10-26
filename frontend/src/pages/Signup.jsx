@@ -4,6 +4,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
@@ -49,6 +50,7 @@ const Signup = () => {
           },
         }
       );
+
       toast.success("Registered successfully!", {
         style: {
           fontSize: "12px",
@@ -60,9 +62,19 @@ const Signup = () => {
           borderColor: "rgba(0, 0, 0, 0.8)",
         },
       });
-      navigate("/");
+
+      // Ensure successful response before navigating
+      if (response.status === 201) {
+        navigate("/");
+      }
     } catch (err) {
-      setError("Server error");
+      console.error("Registration error:", err); // Log error details
+      if (err.response) {
+        // Server responded with a status other than 2xx
+        setError(err.response.data.message || "Server error"); // Customize this based on your API response
+      } else {
+        setError("Network error");
+      }
     }
   };
 
