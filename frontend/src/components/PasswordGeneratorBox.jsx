@@ -49,9 +49,11 @@ const PasswordGeneratorBox = () => {
       });
   };
 
-  // Function to format the password if it's longer than 24 characters
+  // Function to format the password based on screen width
   const formatPassword = (pwd) => {
-    return pwd.length > 24 ? pwd.slice(0, 24) + "..." : pwd;
+    const isMobile = window.innerWidth <= 640; // You can adjust this value as needed
+    const maxLength = isMobile ? 14 : 24; // Set the limit based on screen size
+    return pwd.length > maxLength ? pwd.slice(0, maxLength) + "..." : pwd;
   };
 
   return (
