@@ -90,7 +90,7 @@ const Navbar = () => {
           {/* Mobile Menu Dropdown */}
           <div
             ref={dropdownRef}
-            className={`absolute right-0 mt-56 w-48 bg-gray-800 h-[193px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${
+            className={`absolute right-0 mt-[270px] w-48 bg-gray-800 h-[193px] text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out ${
               isOpen ? "scale-100" : "scale-0"
             } origin-top-right`}
           >
