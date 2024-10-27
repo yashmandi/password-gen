@@ -49,6 +49,11 @@ const PasswordGeneratorBox = () => {
       });
   };
 
+  // Function to format the password if it's longer than 24 characters
+  const formatPassword = (pwd) => {
+    return pwd.length > 24 ? pwd.slice(0, 24) + "..." : pwd;
+  };
+
   return (
     <div className="flex items-center justify-center pt-20 px-4">
       <div className="w-full max-w-lg p-8 border-gray-800 shadow-xl flex flex-col items-center rounded-lg bg-gradient-to-b from-[#243242] to-[#171b23]">
@@ -76,7 +81,7 @@ const PasswordGeneratorBox = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center mt-8 w-full">
             <input
               type="text"
-              value={password}
+              value={formatPassword(password)} // Use the format function here
               readOnly
               className="p-2 rounded-lg bg-gray-700 text-white w-full sm:w-full mb-4 sm:mb-0 text-center font-mono text-lg tracking-wider shadow-inner"
               style={{ maxWidth: '400px', width: '100%' }}
