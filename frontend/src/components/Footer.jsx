@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="mt-20">
-      <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
+    <div className="mt-16">
+      <div className="mx-auto max-w-screen-xl px-4 pb-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-md text-center">
           <strong className="text-2xl sm:text-4xl  font-bold text-white">
             Create strong passwords instantly with <span className="font-extrabold text-[#766cf6]">PassPrompt</span>.
@@ -30,7 +30,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <strong className="font-medium text-white">Contact</strong>
+              <strong className="font-medium text-white lg:mt-4">Contact</strong>
               <ul className="mt-2 text-sm space-y-1">
                 <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="mailto:yashmandi18@gmail.com">Email</a></li>
                 <li><a className="text-gray-400 hover:text-white font-medium transition-all" href="https://x.com/yashmandi">Twitter</a></li>
