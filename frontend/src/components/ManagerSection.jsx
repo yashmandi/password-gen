@@ -7,10 +7,10 @@ const ManagerSection = () => {
       <section>
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-            <div className="relative  h-64 overflow-hidden rounded-xl sm:ml-24 shadow-2xl  sm:h-80 lg:order-last lg:h-full">
+            <div className="relative  h-72 overflow-hidden  sm:ml-24   sm:h-80 lg:order-last lg:h-full">
               <img
                 alt=""
-                src="icons/secure.jpg"
+                src="icons/secure.png"
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
