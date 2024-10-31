@@ -99,6 +99,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
+
 // Login an existing user
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
