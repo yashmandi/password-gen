@@ -6,6 +6,7 @@ import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import { toast } from "react-hot-toast";
 import { getInitials } from "../components/Navbar"; // Import the getInitials function
+import { useEffect } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
