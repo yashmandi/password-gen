@@ -43,16 +43,6 @@ app.use(
   })
 );
 
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://passprompt.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.sendStatus(200); // Return 200 OK for OPTIONS requests
-});
-
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
@@ -294,15 +284,6 @@ app.get("/db-status", async (req, res) => {
       state: mongoose.connection.readyState,
     });
   }
-});
-
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-}).catch(error => {
-  console.error("Failed to connect to MongoDB:", error);
-  process.exit(1); // Exit process with failure
 });
 
 // Start the server
