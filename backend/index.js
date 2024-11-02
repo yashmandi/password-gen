@@ -39,9 +39,10 @@ app.use(
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
-
+app.options("*", cors());
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
@@ -186,15 +187,13 @@ app.get("/health", (req, res) => {
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res
-    .status(500)
-    .json({
-      message: "Something broke!",
-      error:
-        process.env.NODE_ENV === "development"
-          ? err.message
-          : "Internal server error",
-    });
+  res.status(500).json({
+    message: "Something broke!",
+    error:
+      process.env.NODE_ENV === "development"
+        ? err.message
+        : "Internal server error",
+  });
 });
 
 // Save a password (protected route)
