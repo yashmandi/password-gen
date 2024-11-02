@@ -46,8 +46,6 @@ app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 // Connect to MongoDB
-// db.js
-const mongoose = require("mongoose");
 
 let cachedConnection = null;
 
