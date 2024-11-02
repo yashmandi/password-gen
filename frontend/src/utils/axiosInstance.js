@@ -22,42 +22,39 @@
 // export default axiosInstance;
 
 // utils/axiosInstance.js
-import axios from 'axios';
+// utils/axiosInstance.js
+import axios from "axios";
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const axiosInstance = axios.create({
   baseURL: apiUrl,
-  timeout: 10000,
+  timeout: 30000, // Increased timeout to 30 seconds
   headers: {
-    'Content-Type': 'application/json'
-  }
+    "Content-Type": "application/json",
+  },
 });
 
-// Add request interceptor to handle errors
+// Add request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Ensure the URL is correctly formed
-    if (!config.url.startsWith('http')) {
-      config.url = `${apiUrl}${config.url.startsWith('/') ? '' : '/'}${config.url}`;
-    }
+    console.log("Making request to:", config.url);
     return config;
   },
   (error) => {
+    console.error("Request error:", error);
     return Promise.reject(error);
   }
 );
 
-// Add response interceptor for better error handling
+// Add response interceptor
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error('API Error:', {
-      url: error.config?.url,
-      method: error.config?.method,
-      status: error.response?.status,
-      data: error.response?.data
-    });
+    if (error.code === "ECONNABORTED") {
+      console.error("Request timed out");
+      throw new Error("Request timed out. Please try again.");
+    }
     return Promise.reject(error);
   }
 );

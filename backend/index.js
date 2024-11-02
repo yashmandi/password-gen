@@ -26,7 +26,7 @@ const allowedOrigins = [
   "https://passprompt.vercel.app", // Remove trailing slash
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://passgen-api.vercel.app"
+  "https://passgen-api.vercel.app",
 ];
 
 app.use(
@@ -56,9 +56,25 @@ mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    socketTimeoutMS: 45000, // Close sockets after 45s
+    family: 4, // Use IPv4, skip trying IPv6
   })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+  .then(() => {
+    console.log("MongoDB connected successfully");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
+
+// Add connection error handling
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
+});
+
+mongoose.connection.on("disconnected", () => {
+  console.log("MongoDB disconnected");
+});
 
 // Middleware for protecting routes
 const auth = (req, res, next) => {
@@ -111,19 +127,37 @@ app.post("/register", async (req, res) => {
 
 // Login an existing user
 app.post("/login", async (req, res) => {
+  console.log("Login request received:", { email: req.body.email });
+
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    console.log("Missing credentials");
+    return res.status(400).json({ message: "Email and password are required" });
+  }
+
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    console.log("Finding user...");
+    const user = await User.findOne({ email }).maxTimeMS(5000); // Add timeout for MongoDB query
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
+    if (!user) {
+      console.log("User not found:", email);
       return res.status(400).json({ message: "Invalid credentials" });
+    }
 
+    console.log("Comparing password...");
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      console.log("Invalid password for user:", email);
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    console.log("Generating token...");
     const payload = { user: { id: user.id } };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
 
+    console.log("Login successful for user:", email);
     res.json({
       token,
       user: {
@@ -131,9 +165,28 @@ app.post("/login", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error", error: err.message });
+    console.error("Login error:", err);
+
+    // Check for specific MongoDB errors
+    if (err.name === "MongoTimeoutError") {
+      return res.status(503).json({
+        message: "Database operation timed out. Please try again.",
+      });
+    }
+
+    res.status(500).json({
+      message: "Server error",
+      error:
+        process.env.NODE_ENV === "development"
+          ? err.message
+          : "Internal server error",
+    });
   }
+});
+
+// Add a health check endpoint
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 // Save a password (protected route)
@@ -206,6 +259,23 @@ app.get("/passwords", auth, async (req, res) => {
   } catch (err) {
     console.error("Error fetching passwords:", err);
     res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Add this to your backend
+app.get("/db-status", async (req, res) => {
+  try {
+    await mongoose.connection.db.admin().ping();
+    res.json({
+      status: "connected",
+      state: mongoose.connection.readyState,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error.message,
+      state: mongoose.connection.readyState,
+    });
   }
 });
 
