@@ -64,8 +64,9 @@ const Login = () => {
     }
   };
 
-  // Add this to your Login component to verify the URL
-  console.log("API URL:", import.meta.env.VITE_API_URL);
+  useEffect(() => {
+    console.log("Backend API URL:", import.meta.env.VITE_API_URL);
+  }, []);
 
   return (
     <div>

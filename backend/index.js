@@ -26,6 +26,7 @@ const allowedOrigins = [
   "https://passprompt.vercel.app", // Remove trailing slash
   "http://localhost:5173",
   "http://localhost:3000",
+  "https://passgen-api.vercel.app"
 ];
 
 app.use(
