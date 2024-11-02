@@ -19,18 +19,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axiosInstance.post(
-        "/login",
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // Log the request URL for debugging
+      console.log("Attempting login to:", `${apiUrl}/login`);
+
+      const response = await axiosInstance.post("/login", {
+        email,
+        password,
+      });
 
       const data = response.data;
 
@@ -44,35 +39,33 @@ const Login = () => {
         })
       );
 
-      toast.success("Logged in successfully!", {
-        style: {
-          fontSize: "12px",
-          backgroundColor: "rgba(46, 46, 46, 0.8)",
-          color: "#fff",
-          maxWidth: "400px",
-          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-          borderRadius: "8px",
-          borderColor: "rgba(0, 0, 0, 0.8)",
-        },
-      });
-
+      toast.success("Logged in successfully!");
       navigate("/");
     } catch (err) {
-      console.error("Login failed:", err);
-      toast.error("Enter valid email and password.", {
-        style: {
-          fontSize: "13px",
-          backgroundColor: "rgba(46, 46, 46, 0.8)",
-          color: "#fff",
-          maxWidth: "400px",
-          boxShadow: "0px 4px 8px rgba(0, 1, 4, 0.1)",
-          borderRadius: "8px",
-          borderColor: "rgba(0, 0, 0, 0.8)",
-        },
+      console.error("Login failed:", {
+        message: err.message,
+        status: err.response?.status,
+        data: err.response?.data,
+        url: err.config?.url,
       });
-      // setError("Server error. Please try again later.");
+
+      // More specific error messages based on the error type
+      if (err.response?.status === 404) {
+        toast.error(
+          "Server endpoint not found. Please check API configuration."
+        );
+      } else if (err.response?.status === 400) {
+        toast.error("Invalid email or password.");
+      } else if (err.response?.status === 500) {
+        toast.error("Server error. Please try again later.");
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
     }
   };
+
+  // Add this to your Login component to verify the URL
+  console.log("API URL:", import.meta.env.VITE_API_URL);
 
   return (
     <div>
@@ -132,7 +125,11 @@ const Login = () => {
                       className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
                       onClick={() => setShowPassword(!showPassword)}
                     >
-                      {showPassword ? <IoMdEyeOff className="text-xl text-gray-100"/> : <IoEye className="text-xl text-gray-100" />}
+                      {showPassword ? (
+                        <IoMdEyeOff className="text-xl text-gray-100" />
+                      ) : (
+                        <IoEye className="text-xl text-gray-100" />
+                      )}
                     </span>
                   </div>
                 </div>

@@ -11,32 +11,41 @@ const app = express();
 
 const User = require("./models/userModel");
 const Password = require("./models/passwordModel");
-const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_key_not_for_production";
+const JWT_SECRET =
+  process.env.JWT_SECRET || "fallback_secret_key_not_for_production";
 
 // Load environment variables
-const envPath = process.env.NODE_ENV === "production" ? ".env.production" : ".env.development";
+const envPath =
+  process.env.NODE_ENV === "production"
+    ? ".env.production"
+    : ".env.development";
 dotenv.config({ path: path.resolve(__dirname, envPath) });
 
 // CORS configuration
 const allowedOrigins = [
-  "https://passprompt.vercel.app/",
-  "https://passprompt.vercel.app/login",
+  "https://passprompt.vercel.app", // Remove trailing slash
   "http://localhost:5173",
-  "http://localhost:3000"
+  "http://localhost:3000",
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // For development/testing - allow requests with no origin
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        console.log("Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
@@ -53,7 +62,7 @@ mongoose
 // Middleware for protecting routes
 const auth = (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
-  
+
   if (!token) {
     return res.status(401).json({ message: "No token, authorization denied" });
   }
@@ -70,7 +79,7 @@ const auth = (req, res, next) => {
 
 app.post("/", auth, (req, res) => {
   res.send("Hello, World!");
-})
+});
 
 // Register a new user
 app.post("/register", async (req, res) => {
@@ -99,7 +108,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
 // Login an existing user
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -109,7 +117,8 @@ app.post("/login", async (req, res) => {
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
     const payload = { user: { id: user.id } };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
@@ -162,7 +171,8 @@ app.put("/passwords/:id", auth, async (req, res) => {
 
   try {
     let savedPassword = await Password.findById(req.params.id);
-    if (!savedPassword) return res.status(404).json({ message: "Password entry not found" });
+    if (!savedPassword)
+      return res.status(404).json({ message: "Password entry not found" });
 
     if (savedPassword.user.toString() !== req.user.id) {
       return res.status(401).json({ message: "User not authorized" });
@@ -202,4 +212,4 @@ app.get("/passwords", auth, async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-})
+});
