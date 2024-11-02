@@ -42,7 +42,16 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
-app.options("*", cors());
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://passprompt.vercel.app", "https://passgen-api.vercel.app", "http://localhost:5173", "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.sendStatus(200); // Respond OK to the preflight request
+});
+
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
