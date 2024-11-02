@@ -23,28 +23,22 @@ dotenv.config({ path: path.resolve(__dirname, envPath) });
 
 // CORS configuration
 const allowedOrigins = [
-  "https://passprompt.vercel.app", // Remove trailing slash
+  "https://passprompt.vercel.app",
+  "https://passgen-api.vercel.app",
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://passgen-api.vercel.app",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // For development/testing - allow requests with no origin
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.indexOf(origin) !== -1) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log("Blocked by CORS:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -52,29 +46,39 @@ app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 // Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-    socketTimeoutMS: 45000, // Close sockets after 45s
-    family: 4, // Use IPv4, skip trying IPv6
-  })
-  .then(() => {
-    console.log("MongoDB connected successfully");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
+// db.js
+const mongoose = require("mongoose");
 
-// Add connection error handling
-mongoose.connection.on("error", (err) => {
-  console.error("MongoDB connection error:", err);
-});
+let cachedConnection = null;
 
-mongoose.connection.on("disconnected", () => {
-  console.log("MongoDB disconnected");
-});
+const connectDB = async () => {
+  if (cachedConnection) {
+    console.log("Using cached database connection");
+    return cachedConnection;
+  }
+
+  try {
+    const opts = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      bufferCommands: false,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      family: 4,
+    };
+
+    const conn = await mongoose.connect(process.env.MONGO_URI, opts);
+
+    cachedConnection = conn;
+    console.log("MongoDB Connected Successfully");
+    return conn;
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+    throw error;
+  }
+};
+
+module.exports = connectDB;
 
 // Middleware for protecting routes
 const auth = (req, res, next) => {
@@ -127,58 +131,51 @@ app.post("/register", async (req, res) => {
 
 // Login an existing user
 app.post("/login", async (req, res) => {
-  console.log("Login request received:", { email: req.body.email });
-
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    console.log("Missing credentials");
-    return res.status(400).json({ message: "Email and password are required" });
-  }
+  console.log("Login request received");
 
   try {
-    console.log("Finding user...");
-    const user = await User.findOne({ email }).maxTimeMS(5000); // Add timeout for MongoDB query
+    // Ensure DB connection
+    await connectDB();
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
+    }
+
+    const user = await User.findOne({ email }).lean().exec();
 
     if (!user) {
-      console.log("User not found:", email);
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    console.log("Comparing password...");
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      console.log("Invalid password for user:", email);
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    console.log("Generating token...");
-    const payload = { user: { id: user.id } };
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(
+      { user: { id: user._id } },
+      process.env.JWT_SECRET || "fallback_secret_key_not_for_production",
+      { expiresIn: "1h" }
+    );
 
-    console.log("Login successful for user:", email);
-    res.json({
+    return res.json({
       token,
       user: {
         fullName: user.fullName,
       },
     });
-  } catch (err) {
-    console.error("Login error:", err);
-
-    // Check for specific MongoDB errors
-    if (err.name === "MongoTimeoutError") {
-      return res.status(503).json({
-        message: "Database operation timed out. Please try again.",
-      });
-    }
-
-    res.status(500).json({
+  } catch (error) {
+    console.error("Login error:", error);
+    return res.status(500).json({
       message: "Server error",
       error:
         process.env.NODE_ENV === "development"
-          ? err.message
+          ? error.message
           : "Internal server error",
     });
   }
@@ -187,6 +184,19 @@ app.post("/login", async (req, res) => {
 // Add a health check endpoint
 app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res
+    .status(500)
+    .json({
+      message: "Something broke!",
+      error:
+        process.env.NODE_ENV === "development"
+          ? err.message
+          : "Internal server error",
+    });
 });
 
 // Save a password (protected route)

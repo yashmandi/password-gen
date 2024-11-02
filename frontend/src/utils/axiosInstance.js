@@ -23,22 +23,25 @@
 
 // utils/axiosInstance.js
 // utils/axiosInstance.js
+// axiosInstance.js
 import axios from "axios";
 
-const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: apiUrl,
-  timeout: 30000, // Increased timeout to 30 seconds
+  timeout: 15000,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Add request interceptor
+// Request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    console.log("Making request to:", config.url);
+    console.log(
+      `Making ${config.method.toUpperCase()} request to: ${config.url}`
+    );
     return config;
   },
   (error) => {
@@ -47,15 +50,19 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Add response interceptor
+// Response interceptor
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.code === "ECONNABORTED") {
-      console.error("Request timed out");
       throw new Error("Request timed out. Please try again.");
     }
-    return Promise.reject(error);
+    if (error.response?.status === 504) {
+      throw new Error(
+        "Server is taking too long to respond. Please try again."
+      );
+    }
+    throw error;
   }
 );
 
