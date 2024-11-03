@@ -20,24 +20,37 @@ const envPath =
 dotenv.config({ path: path.resolve(__dirname, envPath) });
 
 // CORS configuration
-const allowedOrigins = [
-  "https://passprompt.vercel.app",
-  "https://passgen-api.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-];
+// const allowedOrigins = [
+//   "https://passprompt.vercel.app",
+//   "https://passgen-api.vercel.app",
+//   "http://localhost:5173",
+//   "http://localhost:3000",
+// ];
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   })
+// );
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: [
+      "https://passprompt.vercel.app",
+      "https://passgen-api.vercel.app",
+      "http://localhost:5173",
+      "http://localhost:3000",
+    ],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true, // if you need to include cookies in requests
   })
 );
 
@@ -107,7 +120,11 @@ app.post("/register", async (req, res) => {
     await user.save();
 
     const payload = { user: { id: user.id } };
-    const token = jwt.sign(payload, process.env.JWT_SECRET || "fallback_secret_key_not_for_production", { expiresIn: "1h" });
+    const token = jwt.sign(
+      payload,
+      process.env.JWT_SECRET || "fallback_secret_key_not_for_production",
+      { expiresIn: "1h" }
+    );
 
     res.status(201).json({ token });
   } catch (err) {
@@ -115,7 +132,6 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
-
 
 // Login an existing user
 app.post("/login", async (req, res) => {
