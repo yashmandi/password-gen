@@ -44,37 +44,6 @@ app.use(
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
-// Connect to MongoDB
-
-let cachedConnection = null;
-
-// const connectDB = async () => {
-//   if (cachedConnection) {
-//     console.log("Using cached database connection");
-//     return cachedConnection;
-//   }
-
-//   try {
-//     const opts = {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//       bufferCommands: false,
-//       serverSelectionTimeoutMS: 10000,
-//       socketTimeoutMS: 45000,
-//       family: 4,
-//     };
-
-//     const conn = await mongoose.connect(process.env.MONGO_URI, opts);
-
-//     cachedConnection = conn;
-//     console.log("MongoDB Connected Successfully");
-//     return conn;
-//   } catch (error) {
-//     console.error("MongoDB connection error:", error);
-//     throw error;
-//   }
-// };
-
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -125,15 +94,20 @@ app.post("/register", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    user = new User({ fullName, email, password, phone });
+    // Create a new user instance without the password initially
+    user = new User({ fullName, email, password: "", phone });
 
+    // Hash the password and assign it to user.password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
+
+    // Log the hashed password to verify
+    console.log("Hashed password:", user.password);
 
     await user.save();
 
     const payload = { user: { id: user.id } };
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, process.env.JWT_SECRET || "fallback_secret_key_not_for_production", { expiresIn: "1h" });
 
     res.status(201).json({ token });
   } catch (err) {
@@ -142,14 +116,12 @@ app.post("/register", async (req, res) => {
   }
 });
 
+
 // Login an existing user
 app.post("/login", async (req, res) => {
   console.log("Login request received");
 
   try {
-    // Ensure DB connection
-    // await connectDB();
-
     const { email, password } = req.body;
 
     if (!email || !password) {
