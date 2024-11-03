@@ -36,39 +36,12 @@ app.use(
       "Accept",
       "Origin",
     ],
-    // credentials: true,
-    // maxAge: 86400, // 24 hours
-    // preflightContinue: false,
-    // optionsSuccessStatus: 204,
+    credentials: true,
+    maxAge: 86400, // 24 hours
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 );
-
-app.use(function (req, res, next) {
-  // Specify the exact frontend origin
-  res.header("Access-Control-Allow-Origin", "https://passprompt.vercel.app");
-
-  // Specify allowed headers
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-
-  // Allow credentials
-  res.header("Access-Control-Allow-Credentials", "true");
-
-  // Allow specific HTTP methods (POST, GET, etc.)
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-
-  // Handle preflight OPTIONS request
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200); // Short-circuit to send a 200 OK for preflight
-  }
-
-  next();
-});
-
-// Add OPTIONS handling for preflight requests
-// app.options("*", cors());
 
 // Add custom headers middleware
 app.use((req, res, next) => {
