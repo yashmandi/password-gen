@@ -95,6 +95,10 @@ const auth = (req, res, next) => {
 
 module.exports = auth; //   Don't forget to export the middleware
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the Passgen API!");
+});
+
 app.post("/", auth, (req, res) => {
   res.send("Hello, World!");
 });
