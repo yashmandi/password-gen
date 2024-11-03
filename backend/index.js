@@ -45,7 +45,8 @@ app.use(
   cors({
     origin: [
       "https://passprompt.vercel.app",
-      "https://passgen-api.vercel.app",
+      "https://passprompt.line.pm",
+      "https://passprompt-api.vercel.app",
       "http://localhost:5173",
       "http://localhost:3000",
     ],
