@@ -113,7 +113,7 @@ const Manager = () => {
 
     // Check if the user has already saved 2 passwords
     if (passwordArray.length >= 2) {
-      toast.error("You can only save 2 passwords in free plan.", {
+      toast.error("You can only save 2 passwords in free tier", {
         style: {
           fontSize: "13px",
           backgroundColor: "rgba(46, 46, 46, 0.8)",

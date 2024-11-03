@@ -46,7 +46,7 @@ const About = () => {
             If you have any questions or need assistance, feel free to reach out to us. Our support team is here to help you with any issues or inquiries you may have.
           </p>
           <p className="text-base sm:text-md">
-            Email: <a href="mailto:support@passprompt.com" className="text-blue-400">support@passgen.com</a>
+            Email: <a href="mailto:support@passprompt.com" className="text-blue-400">support@passprompt.com</a>
           </p>
         </section>
       </div>

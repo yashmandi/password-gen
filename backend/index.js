@@ -6,9 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
-
 const app = express();
-
 const User = require("./models/userModel");
 const Password = require("./models/passwordModel");
 const JWT_SECRET =
@@ -50,34 +48,44 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 let cachedConnection = null;
 
-const connectDB = async () => {
-  if (cachedConnection) {
-    console.log("Using cached database connection");
-    return cachedConnection;
-  }
+// const connectDB = async () => {
+//   if (cachedConnection) {
+//     console.log("Using cached database connection");
+//     return cachedConnection;
+//   }
 
-  try {
-    const opts = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      bufferCommands: false,
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-      family: 4,
-    };
+//   try {
+//     const opts = {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//       bufferCommands: false,
+//       serverSelectionTimeoutMS: 10000,
+//       socketTimeoutMS: 45000,
+//       family: 4,
+//     };
 
-    const conn = await mongoose.connect(process.env.MONGO_URI, opts);
+//     const conn = await mongoose.connect(process.env.MONGO_URI, opts);
 
-    cachedConnection = conn;
-    console.log("MongoDB Connected Successfully");
-    return conn;
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw error;
-  }
-};
+//     cachedConnection = conn;
+//     console.log("MongoDB Connected Successfully");
+//     return conn;
+//   } catch (error) {
+//     console.error("MongoDB connection error:", error);
+//     throw error;
+//   }
+// };
 
-module.exports = connectDB;
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+mongoose.set("debug", true);
+
+// module.exports = connectDB;
 
 // Middleware for protecting routes
 
@@ -101,7 +109,7 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports = auth; // Don't forget to export the middleware
+module.exports = auth; //   Don't forget to export the middleware
 
 app.post("/", auth, (req, res) => {
   res.send("Hello, World!");
@@ -140,7 +148,7 @@ app.post("/login", async (req, res) => {
 
   try {
     // Ensure DB connection
-    await connectDB();
+    // await connectDB();
 
     const { email, password } = req.body;
 
@@ -276,21 +284,21 @@ app.get("/passwords", auth, async (req, res) => {
 });
 
 // Add this to your backend
-app.get("/db-status", async (req, res) => {
-  try {
-    await mongoose.connection.db.admin().ping();
-    res.json({
-      status: "connected",
-      state: mongoose.connection.readyState,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "error",
-      error: error.message,
-      state: mongoose.connection.readyState,
-    });
-  }
-});
+// app.get("/db-status", async (req, res) => {
+//   try {
+//     await mongoose.connection.db.admin().ping();
+//     res.json({
+//       status: "connected",
+//       state: mongoose.connection.readyState,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       status: "error",
+//       error: error.message,
+//       state: mongoose.connection.readyState,
+//     });
+//   }
+// });
 
 // Start the server
 const PORT = process.env.PORT || 3000;
