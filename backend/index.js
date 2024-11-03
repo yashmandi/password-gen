@@ -36,10 +36,10 @@ app.use(
       "Accept",
       "Origin",
     ],
-    credentials: true,
-    maxAge: 86400, // 24 hours
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
+    // credentials: true,
+    // maxAge: 86400, // 24 hours
+    // preflightContinue: false,
+    // optionsSuccessStatus: 204,
   })
 );
 
