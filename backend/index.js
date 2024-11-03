@@ -22,11 +22,11 @@ dotenv.config({ path: path.resolve(__dirname, envPath) });
 app.use(
   cors({
     origin: [
-      "https://passprompt.vercel.app",
-      "https://passprompt.line.pm",
+      // "https://passprompt.vercel.app",
+      // "https://passprompt.line.pm",
       "https://passprompt-api.vercel.app",
-      "http://localhost:5173",
-      "http://localhost:3000",
+      // "http://localhost:5173",
+      // "http://localhost:3000",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [
@@ -44,7 +44,7 @@ app.use(
 );
 
 // Add OPTIONS handling for preflight requests
-app.options("*", cors());
+// app.options("*", cors());
 
 // Add custom headers middleware
 app.use((req, res, next) => {
