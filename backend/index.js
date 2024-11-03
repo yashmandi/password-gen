@@ -95,19 +95,42 @@ module.exports = connectDB;
 
 connectDB();
 
+app.get("/debug/auth-status", (req, res) => {
+  const authHeader = req.headers["authorization"];
+
+  res.json({
+    hasAuthHeader: !!authHeader,
+    authHeaderValue: authHeader ? `${authHeader.slice(0, 10)}...` : null,
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // Middleware
 const auth = (req, res, next) => {
   // Get the Authorization header directly from headers object
   const authHeader = req.headers["authorization"];
 
+  // Debug logging
+  console.log("Headers received:", req.headers);
+  console.log("Authorization header:", authHeader);
+
   // If there is no Authorization header, respond with 401
   if (!authHeader) {
-    return res.status(401).json({ message: "No token, authorization denied" });
+    return res.status(401).json({
+      message: "No token, authorization denied",
+      debug: {
+        headersReceived: Object.keys(req.headers),
+        authHeaderPresent: false,
+      },
+    });
   }
 
   // Check if it follows Bearer scheme
   if (!authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "Invalid token format" });
+    return res.status(401).json({
+      message: "Invalid token format. Token must start with 'Bearer '",
+      receivedFormat: authHeader.slice(0, 20), // Show the first 20 chars of what was received
+    });
   }
 
   // Extract the token
@@ -115,7 +138,10 @@ const auth = (req, res, next) => {
 
   // If there is no token after Bearer, respond with 401
   if (!token) {
-    return res.status(401).json({ message: "No token provided" });
+    return res.status(401).json({
+      message: "No token provided after 'Bearer '",
+      receivedHeader: authHeader,
+    });
   }
 
   try {
@@ -132,7 +158,11 @@ const auth = (req, res, next) => {
     next();
   } catch (err) {
     console.error("Token verification failed:", err.message);
-    res.status(401).json({ message: "Token is not valid" });
+    res.status(401).json({
+      message: "Token is not valid",
+      error: err.message,
+      tokenReceived: token.slice(0, 10) + "...", // Show first 10 chars of token
+    });
   }
 };
 
