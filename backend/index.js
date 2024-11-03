@@ -80,22 +80,28 @@ const connectDB = async () => {
 module.exports = connectDB;
 
 // Middleware for protecting routes
+
 const auth = (req, res, next) => {
+  // Extract the token from the Authorization header
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
+  // If there is no token, respond with a 401 Unauthorized status
   if (!token) {
     return res.status(401).json({ message: "No token, authorization denied" });
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded.user;
-    next();
+    // Verify the token using the secret
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Use process.env.JWT_SECRET if you're using environment variables
+    req.user = decoded.user; // Ensure that your token contains the user information in the expected structure
+    next(); // Move to the next middleware/route handler
   } catch (err) {
-    console.error("Token verification failed:", err);
+    console.error("Token verification failed:", err.message); // Log the specific error message for easier debugging
     res.status(401).json({ message: "Token is not valid" });
   }
 };
+
+module.exports = auth; // Don't forget to export the middleware
 
 app.post("/", auth, (req, res) => {
   res.send("Hello, World!");
