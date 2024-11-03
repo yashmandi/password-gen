@@ -29,7 +29,7 @@ app.use(
       "http://localhost:3000",
     ],
     methods: "GET,POST,PUT,DELETE",
-    credentials: true, 
+    credentials: true,
   })
 );
 
@@ -50,26 +50,43 @@ mongoose.set("debug", true);
 
 // Middleware
 const auth = (req, res, next) => {
-  // Extract the token from the Authorization header
-  const token = req.headers("Authorization")?.replace("Bearer ", "");
+  // Get the Authorization header value
+  const authHeader = req.headers.authorization || req.header("Authorization");
 
-  // If there is no token, respond with a 401 Unauthorized status
-  if (!token) {
+  // If there is no Authorization header, respond with 401
+  if (!authHeader) {
     return res.status(401).json({ message: "No token, authorization denied" });
   }
 
+  // Check if it follows Bearer scheme
+  if (!authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Invalid token format" });
+  }
+
+  // Extract the token
+  const token = authHeader.split(" ")[1];
+
+  // If there is no token after Bearer, respond with 401
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
   try {
-    // Verify the token using the secret
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Use process.env.JWT_SECRET if you're using environment variables
-    req.user = decoded.user; // Ensure that your token contains the user information in the expected structure
-    next(); // Move to the next middleware/route handler
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET);
+
+    // Set the user in the request object
+    req.user = decoded.user;
+
+    // Proceed to the next middleware/route handler
+    next();
   } catch (err) {
-    console.error("Token verification failed:", err.message); // Log the specific error message for easier debugging
+    console.error("Token verification failed:", err.message);
     res.status(401).json({ message: "Token is not valid" });
   }
 };
 
-module.exports = auth; //   Don't forget to export the middleware
+module.exports = auth;
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Passgen API!");
