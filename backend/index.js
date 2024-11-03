@@ -19,28 +19,6 @@ const envPath =
     : ".env.development";
 dotenv.config({ path: path.resolve(__dirname, envPath) });
 
-// CORS configuration
-// const allowedOrigins = [
-//   "https://passprompt.vercel.app",
-//   "https://passgen-api.vercel.app",
-//   "http://localhost:5173",
-//   "http://localhost:3000",
-// ];
-
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//   })
-// );
-
 app.use(
   cors({
     origin: [
@@ -51,7 +29,7 @@ app.use(
       "http://localhost:3000",
     ],
     methods: "GET,POST,PUT,DELETE",
-    credentials: true, // if you need to include cookies in requests
+    credentials: true, 
   })
 );
 
@@ -70,13 +48,10 @@ mongoose
 
 mongoose.set("debug", true);
 
-// module.exports = connectDB;
-
-// Middleware for protecting routes
-
+// Middleware
 const auth = (req, res, next) => {
   // Extract the token from the Authorization header
-  const token = req.header("Authorization")?.replace("Bearer ", "");
+  const token = req.headers("Authorization")?.replace("Bearer ", "");
 
   // If there is no token, respond with a 401 Unauthorized status
   if (!token) {
