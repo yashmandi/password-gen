@@ -192,10 +192,10 @@ const auth = (req, res, next) => {
 module.exports = auth;
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Passgen API!");
+  res.send("Welcome to the Passprompt API!");
 });
 
-app.post("/", auth, (req, res) => {
+app.post("/", (req, res) => {
   res.send("Hello, World!");
 });
 
